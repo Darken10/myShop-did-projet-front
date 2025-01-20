@@ -4,6 +4,6 @@ public  enum StatusUserEnum {
     ACTIVE,
     INACTIVE,
     BLOCKED,
-    DELETE;
+    DELETE
 
 }

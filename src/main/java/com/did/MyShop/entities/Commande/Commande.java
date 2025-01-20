@@ -1,6 +1,5 @@
 package com.did.MyShop.entities.Commande;
 
-import com.did.MyShop.entities.Produit.Produit;
 import com.did.MyShop.entities.User.User;
 import com.did.MyShop.enums.StatusCommandEnum;
 import jakarta.persistence.*;
@@ -8,7 +7,6 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
