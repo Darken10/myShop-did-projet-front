@@ -1,11 +1,11 @@
-package com.did.MyShop.services;
+package com.did.MyShop.services.produit;
 
 import com.did.MyShop.DTO.produit.CategorieRequest;
 import com.did.MyShop.DTO.produit.CategorieResponse;
 import com.did.MyShop.Exceptions.RessourceNotFoundException;
 import com.did.MyShop.entities.Produit.Category;
 import com.did.MyShop.mappers.prodiut.CategorieMapper;
-import com.did.MyShop.repositories.CategorieRepository;
+import com.did.MyShop.repositories.produit.CategorieRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
