@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import {initFlowbite} from "flowbite";
+import { OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID ,inject} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +12,14 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'myShop';
+   private platformId: Object = inject(PLATFORM_ID);
+
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      // Code dépendant du navigateur (comme Flowbite)
+      initFlowbite(); // Appelle la méthode si nécessaire
+    }
+  }
 }
