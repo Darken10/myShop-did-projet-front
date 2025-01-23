@@ -1,6 +1,7 @@
 package com.did.MyShop.entities.Commande;
 
 import com.did.MyShop.entities.Produit.Produit;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,7 +25,8 @@ public class Promotion {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private LocalDateTime createDate;
-    @ManyToMany
+    @ManyToMany(mappedBy = "promotions")
+    @JsonIgnore
     private Set<Produit> produits;
 
 

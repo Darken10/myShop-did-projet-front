@@ -1,13 +1,11 @@
 package com.did.MyShop.entities.Ravitaillement;
 
 import com.did.MyShop.enums.StatusRavitaillement;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -22,5 +20,7 @@ public class Ravitaillement {
     private LocalDateTime createDate;
     private LocalDateTime deliveredDate;
     private StatusRavitaillement  status;
+    @OneToMany(mappedBy = "ravitaillement")
+    private List<LigneRavitaillement> ligneRavitaillements;
 
 }

@@ -28,7 +28,9 @@ public class Commande {
     private StatusCommandEnum status;
     private String description;
     @OneToMany
-    private List<LigneCommande> ligneCommande;
+    private List<LigneCommande> ligneCommandes;
+    @OneToMany
+    private List<Paiement> paiements;
     private LocalDateTime createAt;
 
 }

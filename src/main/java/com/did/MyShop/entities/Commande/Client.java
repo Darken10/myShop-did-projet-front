@@ -19,5 +19,5 @@ public class Client {
     private String phone;
     private Double solde;
     @OneToMany
-    private List<LigneCommande> ligneCommande;
+    private List<Commande> commandes;
 }

@@ -2,10 +2,7 @@ package com.did.MyShop.entities.Commande;
 
 import com.did.MyShop.enums.MethodePaiementEnum;
 import com.did.MyShop.enums.StatusPaimentEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -25,4 +22,9 @@ public class Paiement {
     private Double amount;
     private LocalDateTime date;
     private StatusPaimentEnum status;
+    private String comment;
+
+    @ManyToOne
+    @JoinColumn(name = "commande_id")
+    private Commande commande;
 }

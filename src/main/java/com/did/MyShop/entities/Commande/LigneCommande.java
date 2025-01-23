@@ -18,9 +18,10 @@ public class LigneCommande {
     @ManyToOne
     @JoinColumn(name = "commande_id")
     private Commande commande;
+    /*
     @ManyToOne
     @JoinColumn(name = "client_id")
-    private Client client;
+    private Client client;*/
     @ManyToOne
     @JoinColumn(name = "promotion_id")
     private Promotion promotion;
