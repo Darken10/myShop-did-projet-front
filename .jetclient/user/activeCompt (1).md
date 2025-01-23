@@ -1,16 +1,16 @@
 ```toml
-name = 'activeCompt'
+name = 'activeCompt (1)'
 method = 'POST'
 url = 'http://localhost:8080/auth/reset-password'
-sortWeight = 2000000
-id = 'aa885050-1cc3-4235-a196-d3ed3a1424dd'
+sortWeight = 6000000
+id = 'e9fb9c57-e454-42e0-83d8-237aa291fc8b'
 
 [body]
 type = 'JSON'
 raw = '''
 {
-  "email": "test@test.com",
-  "matricule": "123456A",
+  "email": "aaaa@aaa.aaea",
+  "matricule": "23412Y",
   "url": "http://loclahost:4200"
 }'''
 ```

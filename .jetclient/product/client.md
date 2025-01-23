@@ -1,6 +1,6 @@
 ```toml
 name = 'client'
-method = 'POST'
+method = 'GET'
 url = 'http://localhost:8080/clients'
 sortWeight = 4000000
 id = '088749c3-3327-48da-8cad-7714b0a5f796'

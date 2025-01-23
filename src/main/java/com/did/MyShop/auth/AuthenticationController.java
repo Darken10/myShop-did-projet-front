@@ -3,6 +3,7 @@ package com.did.MyShop.auth;
 import com.did.MyShop.DTO.user.UserRequest;
 import com.did.MyShop.DTO.user.UserResponse;
 import com.did.MyShop.entities.User.ResetPasswordJeton;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -46,7 +47,7 @@ public class AuthenticationController {
   @PostMapping("/reset-password")
   public Map<String,Boolean> storeJeton(
           @RequestBody ResetPasswordCredentialRecord request
-  ) {
+  ) throws MessagingException {
 
     var rpj = service.createResetPasswordJeton(request);
     Map<String,Boolean> val = new HashMap<>();

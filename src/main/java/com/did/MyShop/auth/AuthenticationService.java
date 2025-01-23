@@ -16,6 +16,7 @@ import com.did.MyShop.repositories.users.RoleRepository;
 import com.did.MyShop.repositories.users.TokenRepository;
 import com.did.MyShop.repositories.users.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -148,7 +149,7 @@ public class AuthenticationService {
 
 
 
-  public ResetPasswordJeton createResetPasswordJeton(ResetPasswordCredentialRecord request) {
+  public ResetPasswordJeton createResetPasswordJeton(ResetPasswordCredentialRecord request) throws MessagingException {
     var per = personnelRepository.findUserByEmailAndMatricule(request.email(),request.matricule()).orElseThrow(()->new RessourceNotFoundException("user introuvable"));
    /* List<ResetPasswordJeton> resetPasswordJetons = resetPasswordJetonRepository.findAllByUser(per);*/
     per.getResetPasswords().forEach((resetPasswordJeton) ->{
@@ -165,7 +166,14 @@ public class AuthenticationService {
             .isActive(true)
             .isExpire(false)
             .build();
-    sendEmail.sendEmail(per.getEmail(),"Votre jeton de reset password", "Votre Lien de recuperation est : " + request.url()+"?jeton="+jeton);
+
+    try {
+      sendEmail.sendResetPasswordEmail(per.getEmail(),request.url()+"?jeton="+jeton);
+      sendEmail.sendEmail(per.getEmail(),"Votre jeton de reset password", "Votre Lien de recuperation est : " + request.url()+"?jeton="+jeton);
+    } catch (MessagingException e) {
+        throw new RessourceNotFoundException("Le Mail n'a pas pu etre envoyer"+ e.getMessage());
+    }
+
     return resetPasswordJetonRepository.save(resetPasswordJeton);
   }
 

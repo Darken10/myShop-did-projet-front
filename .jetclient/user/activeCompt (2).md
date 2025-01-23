@@ -1,9 +1,9 @@
 ```toml
-name = 'activeCompt'
+name = 'activeCompt (2)'
 method = 'POST'
 url = 'http://localhost:8080/auth/reset-password'
-sortWeight = 2000000
-id = 'aa885050-1cc3-4235-a196-d3ed3a1424dd'
+sortWeight = 7000000
+id = '00c6a292-5750-45f5-a177-66560981112f'
 
 [body]
 type = 'JSON'
