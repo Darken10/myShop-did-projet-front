@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,9 +29,9 @@ public class Commande {
     private StatusCommandEnum status;
     private String description;
     @OneToMany
-    private List<LigneCommande> ligneCommandes;
+    private List<LigneCommande> ligneCommandes = new ArrayList<>();
     @OneToMany
-    private List<Paiement> paiements;
+    private List<Paiement> paiements = new ArrayList<>();
     private LocalDateTime createAt;
 
 }

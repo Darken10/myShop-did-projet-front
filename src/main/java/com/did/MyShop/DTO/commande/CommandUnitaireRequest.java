@@ -1,10 +1,9 @@
 package com.did.MyShop.DTO.commande;
 
-
-public record LigneCommandeRequest(
+public record CommandUnitaireRequest(
         Double prixUnitaire,
         Double quantity,
-        Long produitId,
-        Long promotionsId
+        Long productId,
+        Long promotionId
 ) {
 }

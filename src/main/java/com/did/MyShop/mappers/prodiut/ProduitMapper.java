@@ -5,10 +5,12 @@ import com.did.MyShop.DTO.produit.ProduitResponse;
 import com.did.MyShop.entities.Produit.Category;
 import com.did.MyShop.entities.Produit.Produit;
 import com.did.MyShop.entities.Produit.Tag;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class ProduitMapper {
     public static Produit toProduit(ProduitRequest produit){
 
@@ -42,6 +44,8 @@ public class ProduitMapper {
                 produit.getPrix(),
                 produit.getStock(),
                 produit.getImage(),
+                produit.getSeuil(),
+                produit.getUnite(),
                 CategorieMapper.toCategoriesResponse(produit.getCategory()),
                 produit.getTags().stream().map(TagMapper::toTagsResponse).collect(Collectors.toSet()),
                 produit.getPromotions(),
@@ -55,6 +59,8 @@ public class ProduitMapper {
         produit.setDescription(produitRequest.description());
         produit.setPrix(produitRequest.prix());
         produit.setStock(produitRequest.stock());
+        produit.setSeuil(produitRequest.seuil());
+        produit.setUnite(produitRequest.unite());
         produit.setImage(produitRequest.image());
         produit.setCategory(getCategorie(produitRequest.categoryId()));
         produit.setTags(getTags(produitRequest.tagsId()));

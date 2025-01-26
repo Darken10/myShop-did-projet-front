@@ -1,8 +1,10 @@
 package com.did.MyShop.DTO.produit;
 
+import com.did.MyShop.enums.UniteProduitEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 
+import java.util.List;
 import java.util.Set;
 
 public record ProduitRequest(
@@ -22,10 +24,18 @@ public record ProduitRequest(
 
         String image,
 
+
+        Double seuil,
+
+        UniteProduitEnum unite,
+
         @NotBlank(message = "La categorie est obligatoire")
         Long categoryId,
 
         Set<Long> tagsId
+
+
+
 /*
         Set<Long> promotionsId
         */

@@ -1,5 +1,6 @@
 package com.did.MyShop.entities.Commande;
 
+import com.did.MyShop.entities.Produit.Produit;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,12 +19,11 @@ public class LigneCommande {
     @ManyToOne
     @JoinColumn(name = "commande_id")
     private Commande commande;
-    /*
     @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;*/
+    @JoinColumn(name = "produit_id")
+    private Produit produit;
     @ManyToOne
-    @JoinColumn(name = "promotion_id")
+    @JoinColumn(name = "promotion_id",nullable = true)
     private Promotion promotion;
 
 }

@@ -3,9 +3,12 @@ package com.did.MyShop.controllers.user;
 import com.did.MyShop.DTO.user.UserRequest;
 import com.did.MyShop.DTO.user.UserResponse;
 import com.did.MyShop.auth.ChangePasswordRequest;
+import com.did.MyShop.entities.User.User;
+import com.did.MyShop.mappers.user.UserMapper;
 import com.did.MyShop.services.user.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -17,7 +20,13 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
+
     @GetMapping
+    public UserResponse getConnectedUser(Principal connectedUser) {
+        return userService.getUser(connectedUser);
+    }
+
+    @GetMapping("all")
     public List<UserResponse> index(){
         return userService.All();
     }
@@ -30,25 +39,25 @@ public class UserController {
         return userService.save(userRequest);
     }
 
-    @GetMapping("/{personnel_id}")
+    @GetMapping("/{id}")
     public UserResponse show(
-            @PathVariable("personnel_id") Long personnelId
+            @PathVariable("id") Long personnelId
     ){
         return userService.find(personnelId);
     }
 
 
-    @PutMapping("/{personnel_id}")
+    @PutMapping("/{id}")
     public UserResponse update(
-            @PathVariable("personnel_id") Long personnelId,
+            @PathVariable("id") Long personnelId,
             @Valid @RequestBody UserRequest userRequest
     ){
         return userService.update(personnelId,userRequest);
     }
 
-    @DeleteMapping("/{personnel_id}")
+    @DeleteMapping("/{id}")
     public void delete(
-            @PathVariable("personnel_id") Long personnelId
+            @PathVariable("id") Long personnelId
     ){
         userService.delete(personnelId);
     }
@@ -60,4 +69,6 @@ public class UserController {
     ) {
         return userService.changePassword(request, connectedUser);
     }
+
+
 }

@@ -10,6 +10,6 @@ type = 'JSON'
 raw = '''
 {
 "password": "password",
-"jeton": "764402ec-4b37-4a5b-bbe1-1c018b5672d2"
+"jeton": "74c7fc01-6b37-4764-8f7e-8babbb5ac3a9"
 }'''
 ```

@@ -7,11 +7,11 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
-public record CommandeRequest(
+public record CreateNewCommandeCredentiale(
         @NotNull(message = "Un client doit etre fournie")
          Long clientId,
          String description,
          StatusCommandEnum status,
-        List<LigneCommandeRequest> ligneCommandes
+        List<CommandUnitaireRequest> productIdList
 ) {
 }

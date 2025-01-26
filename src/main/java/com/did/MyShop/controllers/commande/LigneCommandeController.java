@@ -16,6 +16,7 @@ import java.util.List;
 @RequestMapping("/ligne-commandes")
 public class LigneCommandeController {
 
+/*
     private final LigneCommandeService ligneCommandeService;
 
     @GetMapping
@@ -49,5 +50,6 @@ public class LigneCommandeController {
     public void delete(@PathVariable Long id){
         ligneCommandeService.delete(id);
     }
+*/
 
 }

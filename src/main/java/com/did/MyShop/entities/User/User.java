@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -36,18 +37,19 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private StatusUserEnum status;
 
-    @ManyToMany(mappedBy = "users",cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Role> roles;
+    @ManyToMany(mappedBy = "users",cascade = {CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER)
+    private Set<Role> roles = new HashSet<>();
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnore
     private List<ResetPasswordJeton> resetPasswords;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles()
+       return getRoles()
                 .stream()
                 .map(role -> new SimpleGrantedAuthority(role.getLibelle()))
                 .collect(Collectors.toList());
+
     }
 
     @Override

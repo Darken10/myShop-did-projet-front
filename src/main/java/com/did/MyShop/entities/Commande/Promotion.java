@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -25,9 +26,14 @@ public class Promotion {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private LocalDateTime createDate;
-    @ManyToMany(mappedBy = "promotions")
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "produit_promotion",
+            joinColumns = @JoinColumn(name = "produit_id"),
+            inverseJoinColumns = @JoinColumn(name = "promotion_id")
+    )
     @JsonIgnore
-    private Set<Produit> produits;
+    private Set<Produit> produits = new HashSet<>();
 
 
 }
