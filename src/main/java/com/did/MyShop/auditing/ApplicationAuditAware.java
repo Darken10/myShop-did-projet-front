@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
 
+
 public class ApplicationAuditAware implements AuditorAware<User> {
     @Override
     public Optional<User> getCurrentAuditor() {
