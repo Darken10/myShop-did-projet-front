@@ -4,12 +4,15 @@ package com.did.MyShop.services.commande;
 import com.did.MyShop.DTO.commande.CommandeRequest;
 import com.did.MyShop.DTO.commande.CommandeResponse;
 import com.did.MyShop.DTO.commande.CreateNewCommandeCredentiale;
+import com.did.MyShop.DTO.commande.PaiementRequest;
 import com.did.MyShop.Exceptions.RessourceNotFoundException;
 import com.did.MyShop.entities.Commande.Client;
 import com.did.MyShop.entities.Commande.Commande;
 import com.did.MyShop.entities.Commande.LigneCommande;
+import com.did.MyShop.entities.Commande.Paiement;
 import com.did.MyShop.entities.User.User;
 import com.did.MyShop.mappers.Commande.CommandeMapper;
+import com.did.MyShop.mappers.Commande.PaiementMapper;
 import com.did.MyShop.repositories.commande.CommandeRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -26,6 +29,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CommandeService {
 
+    private final PaiementService paiementService;
     CommandeRepository commandeRepository;
     LigneCommandeService ligneCommandeService;
 
@@ -65,6 +69,9 @@ public class CommandeService {
         return CommandeMapper.toCommandeResponse(commande);
     }
 
+
+
+
     public void delete(Long id){
         commandeRepository.delete(getCommande(id));
     }
@@ -72,5 +79,8 @@ public class CommandeService {
     private Commande getCommande(Long id){
         return commandeRepository.findById(id).orElseThrow(()->new RessourceNotFoundException("Commande n°"+id +" non trouve"));
     }
+
+
+
 
 }

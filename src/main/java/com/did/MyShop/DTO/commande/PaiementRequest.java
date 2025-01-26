@@ -11,6 +11,7 @@ public record PaiementRequest(
         Double amount,
         LocalDateTime date,
         StatusPaimentEnum status,
-        String comment
+        String comment,
+        Long commandeId
 ) {
 }

@@ -3,6 +3,7 @@ package com.did.MyShop.mappers.Commande;
 
 import com.did.MyShop.DTO.commande.PaiementRequest;
 import com.did.MyShop.DTO.commande.PaiementResponse;
+import com.did.MyShop.entities.Commande.Commande;
 import com.did.MyShop.entities.Commande.Paiement;
 
 public class PaiementMapper {
@@ -15,6 +16,7 @@ public class PaiementMapper {
                 .date(request.date())
                 .status(request.status())
                 .comment(request.comment())
+                .commande(getNewCommand(request.commandeId()))
                 .build();
 
     };
@@ -29,6 +31,11 @@ public class PaiementMapper {
                 paiement.getStatus(),
                 paiement.getComment()
         );
+    }
+
+    private static Commande getNewCommand (Long id) {
+        return Commande.builder().id(id).build();
+
     }
 
 

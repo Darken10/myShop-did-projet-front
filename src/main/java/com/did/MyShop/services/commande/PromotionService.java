@@ -1,7 +1,6 @@
 package com.did.MyShop.services.commande;
 
 import com.did.MyShop.DTO.commande.PromotionRequest;
-import com.did.MyShop.DTO.produit.ProduitRequest;
 import com.did.MyShop.Exceptions.RessourceNotFoundException;
 import com.did.MyShop.entities.Commande.Promotion;
 import com.did.MyShop.entities.Produit.Produit;
