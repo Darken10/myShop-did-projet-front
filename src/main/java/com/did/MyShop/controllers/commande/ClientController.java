@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/clients")
 public class ClientController {
 
-/*
+
     private ClientService clientService;
 
      @GetMapping
@@ -49,7 +49,5 @@ public class ClientController {
     public void delete(@PathVariable Long id){
           clientService.delete(id);
     }
-*/
-
 
 }

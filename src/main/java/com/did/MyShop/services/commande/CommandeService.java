@@ -44,10 +44,8 @@ public class CommandeService {
     public CommandeResponse create(CommandeRequest commandeRequest, Principal principal){
         Commande commande = CommandeMapper.toCommande(commandeRequest);
         User user = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
-
         commande.setCreateAt(LocalDateTime.now());
         commande.setUser(user);
-
 
         commandeRequest.ligneCommandes().forEach((lcreq)-> {
             var lcI = ligneCommandeService.create(lcreq,commandeRepository.save(commande).getId());

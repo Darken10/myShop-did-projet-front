@@ -1,19 +1,13 @@
 ```toml
-name = 'commande'
+name = 'product (1) (1)'
 method = 'POST'
-url = 'http://localhost:8080/commandes'
-sortWeight = 5000000
-id = 'd47275ee-7003-4dbc-8f5b-456f73d65e71'
+url = 'http://localhost:8080/promostions'
+sortWeight = 7000000
+id = 'ca938bb5-abc3-4410-9ae1-98ace89f6ac0'
 
 [auth.bearer]
 token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTZBIiwiaWF0IjoxNzM3OTE0MDY2LCJleHAiOjE3MzgwMDA0NjZ9.otIp6_KaQeIWFu9HWULWJq7D-fxqz4RWJ9VZfgFx2sU'
 
 [body]
 type = 'JSON'
-raw = '''
-{
-  "clientId": 1,
-  "description": "Test",
-  "status": "NEW"
-}'''
 ```

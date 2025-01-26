@@ -10,6 +10,7 @@ public class ClientMapper {
                 .name(request.name())
                 .phone(request.phone())
                 .solde(request.solde())
+                .adress(request.adress())
                 .build();
 
     };
@@ -19,7 +20,8 @@ public class ClientMapper {
                 client.getId(),
                 client.getName(),
                 client.getPhone(),
-                client.getSolde()
+                client.getSolde(),
+                client.getAdress()
                 );
     }
 }

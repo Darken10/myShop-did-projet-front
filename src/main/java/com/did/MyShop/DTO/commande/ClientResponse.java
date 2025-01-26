@@ -4,6 +4,7 @@ public record ClientResponse(
         Long id,
         String name,
         String phone,
-        Double solde
+        Double solde,
+        String adress
 ) {
 }
