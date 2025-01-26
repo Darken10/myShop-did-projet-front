@@ -1,0 +1,1343 @@
+openapi: "3.1.0"
+info:
+  title: "Back API"
+  description: "Back API"
+  version: "1.0.0"
+servers:
+  - url: "https://Back"
+paths:
+  /categories/{id}:
+    put:
+      summary: "PUT categories/{id}"
+      operationId: "updateCategory"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CategorieRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Category"
+    delete:
+      summary: "DELETE categories/{id}"
+      operationId: "deleteCategory"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    get:
+      summary: "GET categories/{id}"
+      operationId: "getOne"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CategorieResponse"
+  /categories:
+    post:
+      summary: "POST categories"
+      operationId: "addCategory"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CategorieRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Category"
+    get:
+      summary: "GET categories"
+      operationId: "getAll"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/CategorieResponse"
+  /tags/{id}:
+    put:
+      summary: "PUT tags/{id}"
+      operationId: "updateCategory"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TagRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TagResponse"
+    delete:
+      summary: "DELETE tags/{id}"
+      operationId: "deleteCategory"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    get:
+      summary: "GET tags/{id}"
+      operationId: "getOne"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TagResponse"
+  /tags:
+    post:
+      summary: "POST tags"
+      operationId: "addCategory"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TagRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TagResponse"
+    get:
+      summary: "GET tags"
+      operationId: "getAll"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/TagResponse"
+  /produits/{id}:
+    put:
+      summary: "PUT produits/{id}"
+      operationId: "updateProduit"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProduitRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProduitResponse"
+    delete:
+      summary: "DELETE produits/{id}"
+      operationId: "deleteProduit"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    get:
+      summary: "GET produits/{id}"
+      operationId: "getOne"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProduitResponse"
+  /produits:
+    post:
+      summary: "POST produits"
+      operationId: "addProduit"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProduitRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProduitResponse"
+    get:
+      summary: "GET produits"
+      operationId: "getAll"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/ProduitResponse"
+  /commandes/{id}:
+    put:
+      summary: "PUT commandes/{id}"
+      operationId: "update"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CommandeRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CommandeResponse"
+    delete:
+      summary: "DELETE commandes/{id}"
+      operationId: "delete"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    get:
+      summary: "GET commandes/{id}"
+      operationId: "getById"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CommandeResponse"
+  /commandes:
+    post:
+      summary: "POST commandes"
+      operationId: "save"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CommandeRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CommandeResponse"
+    get:
+      summary: "GET commandes"
+      operationId: "getAll"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/CommandeResponse"
+  /clients/{id}:
+    put:
+      summary: "PUT clients/{id}"
+      operationId: "update"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ClientResponse"
+    delete:
+      summary: "DELETE clients/{id}"
+      operationId: "delete"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    get:
+      summary: "GET clients/{id}"
+      operationId: "getById"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ClientResponse"
+  /clients:
+    post:
+      summary: "POST clients"
+      operationId: "save"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ClientResponse"
+    get:
+      summary: "GET clients"
+      operationId: "getAll"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/ClientResponse"
+  /ligne-commandes/{id}:
+    put:
+      summary: "PUT ligne-commandes/{id}"
+      operationId: "update"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LigneCommandeRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/LigneCommandeResponse"
+    delete:
+      summary: "DELETE ligne-commandes/{id}"
+      operationId: "delete"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    get:
+      summary: "GET ligne-commandes/{id}"
+      operationId: "getById"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/LigneCommandeResponse"
+  /ligne-commandes:
+    post:
+      summary: "POST ligne-commandes"
+      operationId: "save"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LigneCommandeRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/LigneCommandeResponse"
+    get:
+      summary: "GET ligne-commandes"
+      operationId: "getAll"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/LigneCommandeResponse"
+  /auth/register:
+    post:
+      summary: "POST auth/register"
+      operationId: "register"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+  /auth/authenticate:
+    post:
+      summary: "POST auth/authenticate"
+      operationId: "authenticate"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthenticationRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthenticationResponse"
+  /auth/refresh-token:
+    post:
+      summary: "POST auth/refresh-token"
+      operationId: "refreshToken"
+      responses:
+        "200":
+          description: "OK"
+  /auth/reset-password:
+    post:
+      summary: "POST auth/reset-password"
+      operationId: "storeJeton"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetPasswordCredentialRecord"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+  /auth/reset-password/new-password:
+    post:
+      summary: "POST auth/reset-password/new-password"
+      operationId: "storeJeton"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewPasswordCredential"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+  /auth/reset-password/{jeton}:
+    get:
+      summary: "GET auth/reset-password/{jeton}"
+      operationId: "storeJeton"
+      parameters:
+        - name: "jeton"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+  /auth/user/{id}:
+    put:
+      summary: "PUT auth/user/{id}"
+      operationId: "update"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+    delete:
+      summary: "DELETE auth/user/{id}"
+      operationId: "delete"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    get:
+      summary: "GET auth/user/{id}"
+      operationId: "show"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+  /auth/user/change-password:
+    patch:
+      summary: "PATCH auth/user/change-password"
+      operationId: "resetPassword"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChangePasswordRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+  /auth/user:
+    post:
+      summary: "POST auth/user"
+      operationId: "store"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+    get:
+      summary: "GET auth/user"
+      operationId: "getConnectedUser"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+  /auth/user/all:
+    get:
+      summary: "GET auth/user/all"
+      operationId: "index"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/UserResponse"
+components:
+  schemas:
+    CategorieRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        description:
+          type: "string"
+    Tag:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        description:
+          type: "string"
+    Promotion:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        description:
+          type: "string"
+        reduction:
+          type: "number"
+          format: "double"
+        isPercent:
+          type: "boolean"
+        startDate:
+          type: "string"
+          format: "date-time"
+        endDate:
+          type: "string"
+          format: "date-time"
+        createDate:
+          type: "string"
+          format: "date-time"
+    Ravitaillement:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        createDate:
+          type: "string"
+          format: "date-time"
+        deliveredDate:
+          type: "string"
+          format: "date-time"
+        status:
+          type: "string"
+          enum:
+            - "NEW"
+            - "DELIVERED"
+            - "PROCESSED"
+            - "SHIPPED"
+            - "CANCELED"
+        ligneRavitaillements:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/LigneRavitaillement"
+    LigneRavitaillement:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        quantite:
+          type: "number"
+          format: "double"
+        ravitaillement:
+          $ref: "#/components/schemas/Ravitaillement"
+        produit:
+          $ref: "#/components/schemas/Produit"
+    Role:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        libelle:
+          type: "string"
+        description:
+          type: "string"
+        users:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/User"
+    User:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        genre:
+          type: "string"
+          enum:
+            - "MALE"
+            - "FEMALE"
+        email:
+          type: "string"
+        dateNaissance:
+          type: "string"
+        phoneNumber:
+          type: "string"
+        matricule:
+          type: "string"
+        password:
+          type: "string"
+        status:
+          type: "string"
+          enum:
+            - "EN_ATTENTE"
+            - "ACTIVE"
+            - "INACTIVE"
+            - "BLOCKED"
+            - "DELETE"
+        roles:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Role"
+    Client:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        phone:
+          type: "string"
+        solde:
+          type: "number"
+          format: "double"
+        commandes:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Commande"
+    Paiement:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        methode:
+          type: "string"
+          enum:
+            - "CARTE"
+            - "ESPECE"
+            - "MOBILE_MONEY"
+        reference:
+          type: "string"
+        amount:
+          type: "number"
+          format: "double"
+        date:
+          type: "string"
+          format: "date-time"
+        status:
+          type: "string"
+          enum:
+            - "PAYER"
+            - "EN_ATTENTE"
+        comment:
+          type: "string"
+        commande:
+          $ref: "#/components/schemas/Commande"
+    Commande:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        user:
+          $ref: "#/components/schemas/User"
+        client:
+          $ref: "#/components/schemas/Client"
+        status:
+          type: "string"
+          enum:
+            - "NEW"
+            - "DELIVERED"
+            - "PROCESSED"
+            - "SHIPPED"
+            - "CANCELED"
+        description:
+          type: "string"
+        ligneCommandes:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/LigneCommande"
+        paiements:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Paiement"
+        createAt:
+          type: "string"
+          format: "date-time"
+    LigneCommande:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        prixUnitaire:
+          type: "number"
+          format: "double"
+        quantity:
+          type: "number"
+          format: "double"
+        commande:
+          $ref: "#/components/schemas/Commande"
+        produit:
+          $ref: "#/components/schemas/Produit"
+        promotion:
+          $ref: "#/components/schemas/Promotion"
+    Produit:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        libelle:
+          type: "string"
+        prix:
+          type: "number"
+          format: "double"
+        stock:
+          type: "integer"
+          format: "int32"
+        description:
+          type: "string"
+        image:
+          type: "string"
+        seuil:
+          type: "number"
+          format: "double"
+        unite:
+          type: "string"
+          enum:
+            - "KG"
+            - "PAQUET"
+            - "LITRE"
+            - "SAC"
+            - "UNITE"
+        category:
+          $ref: "#/components/schemas/Category"
+        tags:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Tag"
+        promotions:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Promotion"
+        ligneRavitaillements:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/LigneRavitaillement"
+        ligneCommandes:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/LigneCommande"
+    Category:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        description:
+          type: "string"
+        produits:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Produit"
+    CategorieResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        description:
+          type: "string"
+    TagRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        description:
+          type: "string"
+    TagResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        description:
+          type: "string"
+    ProduitRequest:
+      type: "object"
+      properties:
+        libelle:
+          type: "string"
+        description:
+          type: "string"
+        prix:
+          type: "number"
+          format: "double"
+        stock:
+          type: "integer"
+          format: "int32"
+        image:
+          type: "string"
+        seuil:
+          type: "number"
+          format: "double"
+        unite:
+          type: "string"
+          enum:
+            - "KG"
+            - "PAQUET"
+            - "LITRE"
+            - "SAC"
+            - "UNITE"
+        categoryId:
+          type: "integer"
+          format: "int64"
+        tagsId:
+          type: "array"
+          items:
+            type: "integer"
+            format: "int64"
+    ProduitResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        libelle:
+          type: "string"
+        description:
+          type: "string"
+        prix:
+          type: "number"
+          format: "double"
+        stock:
+          type: "integer"
+          format: "int32"
+        image:
+          type: "string"
+        seuil:
+          type: "number"
+          format: "double"
+        unite:
+          type: "string"
+          enum:
+            - "KG"
+            - "PAQUET"
+            - "LITRE"
+            - "SAC"
+            - "UNITE"
+        category:
+          $ref: "#/components/schemas/CategorieResponse"
+        tags:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/TagResponse"
+        promotions:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Promotion"
+        ligneRavitaillements:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/LigneRavitaillement"
+    LigneCommandeRequest:
+      type: "object"
+      properties:
+        prixUnitaire:
+          type: "number"
+          format: "double"
+        quantity:
+          type: "number"
+          format: "double"
+        produitId:
+          type: "integer"
+          format: "int64"
+        promotionsId:
+          type: "integer"
+          format: "int64"
+    CommandeRequest:
+      type: "object"
+      properties:
+        clientId:
+          type: "integer"
+          format: "int64"
+        description:
+          type: "string"
+        status:
+          type: "string"
+          enum:
+            - "NEW"
+            - "DELIVERED"
+            - "PROCESSED"
+            - "SHIPPED"
+            - "CANCELED"
+        ligneCommandes:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/LigneCommandeRequest"
+    ClientResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        phone:
+          type: "string"
+        solde:
+          type: "number"
+          format: "double"
+    PaiementResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        methode:
+          type: "string"
+          enum:
+            - "CARTE"
+            - "ESPECE"
+            - "MOBILE_MONEY"
+        reference:
+          type: "string"
+        amount:
+          type: "number"
+          format: "double"
+        date:
+          type: "string"
+          format: "date-time"
+        status:
+          type: "string"
+          enum:
+            - "PAYER"
+            - "EN_ATTENTE"
+        comment:
+          type: "string"
+    CommandeResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        client:
+          $ref: "#/components/schemas/ClientResponse"
+        description:
+          type: "string"
+        status:
+          type: "string"
+          enum:
+            - "NEW"
+            - "DELIVERED"
+            - "PROCESSED"
+            - "SHIPPED"
+            - "CANCELED"
+        paiements:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/PaiementResponse"
+        createAt:
+          type: "string"
+          format: "date-time"
+    ClientRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        phone:
+          type: "string"
+        solde:
+          type: "number"
+          format: "double"
+    LigneCommandeResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        prixUnitaire:
+          type: "number"
+          format: "double"
+        quantity:
+          type: "number"
+          format: "double"
+        produit:
+          $ref: "#/components/schemas/ProduitResponse"
+    UserRequest:
+      type: "object"
+      properties:
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        genre:
+          type: "string"
+          enum:
+            - "MALE"
+            - "FEMALE"
+        dateNaissance:
+          type: "string"
+        email:
+          type: "string"
+        phoneNumber:
+          type: "string"
+        matricule:
+          type: "string"
+        status:
+          type: "string"
+          enum:
+            - "EN_ATTENTE"
+            - "ACTIVE"
+            - "INACTIVE"
+            - "BLOCKED"
+            - "DELETE"
+        rolesId:
+          type: "array"
+          items:
+            type: "integer"
+            format: "int64"
+    RoleResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        libelle:
+          type: "string"
+        description:
+          type: "string"
+    UserResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        genre:
+          type: "string"
+          enum:
+            - "MALE"
+            - "FEMALE"
+        dateNaissance:
+          type: "string"
+        email:
+          type: "string"
+        phoneNumber:
+          type: "string"
+        matricule:
+          type: "string"
+        status:
+          type: "string"
+          enum:
+            - "EN_ATTENTE"
+            - "ACTIVE"
+            - "INACTIVE"
+            - "BLOCKED"
+            - "DELETE"
+        roles:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/RoleResponse"
+    AuthenticationRequest:
+      type: "object"
+      properties:
+        matricule:
+          type: "string"
+        password:
+          type: "string"
+    AuthenticationResponse:
+      type: "object"
+      properties:
+        token:
+          type: "string"
+        refreshToken:
+          type: "string"
+        user:
+          $ref: "#/components/schemas/UserResponse"
+    ResetPasswordCredentialRecord:
+      type: "object"
+      properties:
+        email:
+          type: "string"
+        matricule:
+          type: "string"
+        url:
+          type: "string"
+    NewPasswordCredential:
+      type: "object"
+      properties:
+        password:
+          type: "string"
+        jeton:
+          type: "string"
+    ChangePasswordRequest:
+      type: "object"
+      properties:
+        currentPassword:
+          type: "string"
+        newPassword:
+          type: "string"
+        confirmationPassword:
+          type: "string"
