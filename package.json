@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:myShop": "node dist/my-shop/server/server.mjs",
-    "api" : "ng-openapi-gen --input src/openapi/open-api.yaml --output src/app/services"
+    "api" : "ng-openapi-gen --input src/openapi/open-api.yaml --output src/app/services/open-api"
   },
   "private": true,
   "dependencies": {
