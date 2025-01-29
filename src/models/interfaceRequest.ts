@@ -23,3 +23,13 @@ export interface Tag {
   description: string;
 }
 
+
+export interface Promotion {
+  name: string;
+  description: string;
+  reduction: number;
+  isPercent: boolean;
+  startDate: Date;
+  endDate: Date;
+  produitsId: number[];
+}

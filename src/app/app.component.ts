@@ -4,14 +4,13 @@ import {initFlowbite} from "flowbite";
 import { OnInit } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID ,inject} from '@angular/core';
-import {HttpClientModule} from "@angular/common/http";
-import {ApiModule} from "./services/api.module";
-
+import {AlertComponent} from "./component/alert/alert/alert.component";
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
+    AlertComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

@@ -24,78 +24,60 @@
           </li>
         </ol>
       </nav>
-     <div class="flex justify-between gap-4 items-center ">
-       <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Information du produit</h1>
-       <div class="flex gap-4 items-center ">
-         <button type="button" class="text-white inline-flex gap-2 items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-             <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-           </svg>
-           modifier
-         </button>
-       </div>
-     </div>
+      <div class="flex justify-between gap-4 items-center ">
+        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Voir le Promo</h1>
+        <div class="flex gap-4 items-center ">
+          <button type="button" class="text-white inline-flex gap-2 items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+            </svg>
+            modifier
+          </button>
+        </div>
+      </div>
     </div>
 
     <div class="col-span-3">
       <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-        <h3 class="mb-4 text-xl font-semibold dark:text-white">Produit :  {{produit?.libelle}}</h3>
+        <h3 class="mb-4 text-xl font-semibold dark:text-white">Promo :  {{promotion?.name}}</h3>
         <hr>
         <div class="mt-4">
           <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div>
               <div class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Nom</div>
-              <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{produit?.libelle}}</div>
+              <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{promotion?.name}}</div>
             </div>
             <div>
-              <div class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Categorie</div>
-              <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{produit?.category?.name}}</div>
+              <div class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Reduction</div>
+              <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{promotion?.reduction}} {{promotion?.isPercent ? '%': 'XOF'}}</div>
             </div>
           </div>
           <div class="mb-6">
             <div class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Description</div>
-            <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{produit?.description}}</div>
+            <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{promotion?.description}}</div>
           </div>
 
-          <div class="grid gap-6 mb-6 md:grid-cols-2">
-            <div>
-              <div class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">prix</div>
-              <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{produit?.prix}}</div>
-            </div>
-            <div>
-              <div class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Etiquette</div>
-              <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                @for (tag of produit?.tags; track tag.id) {
-                  <span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">
-                    {{tag.name}}
-                  </span>
-                }
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
+              <div>
+                <div class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Date de Debut</div>
+                <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{promotion?.startDate}}</div>
+              </div>
+              <div>
+                <div class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Date de Fin</div>
+                <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{promotion?.endDate}}</div>
               </div>
             </div>
-          </div>
-          <div class="grid gap-6 mb-6 md:grid-cols-2">
-            <div>
-              <div class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Stock</div>
-              <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{produit?.stock}} {{produit?.unite}}</div>
-            </div>
-            <div>
-              <div class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">seuil</div>
-              <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{produit?.seuil}} {{produit?.unite}}</div>
-            </div>
-          </div>
 
+          </div>
         </div>
-      </div>
     </div>
-
-
 
     <div class=" col-span-3 mb-4 relative overflow-x-auto shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
           <div class="flex justify-between items-center">
             <div>
-              Les Promotion du Produit
+              Les Produits Concernés
             </div>
             <button type="submit" class="text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
               <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
@@ -107,7 +89,10 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
           <th scope="col" class="px-6 py-3">
-            Nom de la Promotion
+            Nom du produit
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Stock
           </th>
           <th scope="col" class="px-6 py-3">
             Prix Avant
@@ -116,50 +101,33 @@
             Prix Apres
           </th>
           <th scope="col" class="px-6 py-3">
-            Statut
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Date Debut
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Date Fin
-          </th>
-          <th scope="col" class="px-6 py-3">
             <span class="sr-only">Edit</span>
           </th>
         </tr>
         </thead>
         <tbody>
-          @for (promo of produit?.promotions; track promo.id) {
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          @for (prod of promotion?.produits; track prod.id) {
+             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {{promo.name}}
+                {{prod.libelle}}
               </th>
               <td class="px-6 py-4">
-                {{ produit?.prix }}
+                {{ prod.stock }} {{prod.unite}}
               </td>
               <td class="px-6 py-4">
-                {{ getPrice(promo.reduction,promo.isPercent) }} XOF
+                {{ prod.prix }}
               </td>
               <td class="px-6 py-4">
-                active
-              </td>
-              <td class="px-6 py-4">
-                {{promo.startDate}}
-              </td>
-              <td class="px-6 py-4">
-                {{promo.endDate}}
+                {{ getPrice(prod.prix) }} XOF
               </td>
               <td class="px-6 py-4 text-right">
-                <button type="button" (click)="retirerProduit(promo.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Retirer</button>
+                <button type="button" (click)="retirerProduit(prod.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Retirer</button>
               </td>
             </tr>
           }
         </tbody>
       </table>
     </div>
-
-
 
   </div>
 </main>

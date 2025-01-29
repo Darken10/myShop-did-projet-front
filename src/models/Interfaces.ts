@@ -13,18 +13,21 @@ export interface ITag {
   description: string;
 }
 
-export interface  IProduit{
+export interface  IProduit extends IProduitMini{
+  image?: string;
+  category: ICategory;
+  tags: ITag[];
+  promotions: IPromotion[];
+  ligneRavitaillements: any[];
+  seuil :number;
+}
+
+export interface IProduitMini{
   id: number;
   libelle: string;
   description?: string;
   prix: number;
   stock: number;
-  image?: string;
-  category: ICategory;
-  tags: ITag[];
-  promotions: any[];
-  ligneRavitaillements: any[];
-  seuil :number;
   unite: UniteProduitEnum;
 }
 
@@ -46,4 +49,19 @@ export interface IUser {
   matricule: string;
   status: UserStatusEnum;
   roles: Role[];
+}
+
+export interface IPromotion {
+  id: number;
+  name: string;
+  description: string;
+  reduction: number;
+  isPercent: boolean;
+  startDate: Date;
+  endDate: Date;
+  createDate: Date;
+}
+
+export interface IFullPromotion extends IPromotion{
+  produits: IProduitMini[];
 }

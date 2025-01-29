@@ -33,6 +33,15 @@ import {
   GestionnaireShowProduitPageComponent
 } from "./pages/gestionnaire/gestionnaire-show-produit-page/gestionnaire-show-produit-page.component";
 import {isLoggedInGuardGuard} from "./guards/is-logged-in-guard.guard";
+import {
+  GestionnairePromotionListPageComponent
+} from "./pages/gestionnaire/gestionnaire-promotion-list-page/gestionnaire-promotion-list-page.component";
+import {
+  GestionnaireCreatePromotionPageComponent
+} from "./pages/gestionnaire/gestionnaire-create-promotion-page/gestionnaire-create-promotion-page.component";
+import {
+  GestionnaireShowPromotionComponent
+} from "./pages/gestionnaire/gestionnaire-show-promotion/gestionnaire-show-promotion.component";
 
 export const routes: Routes = [
   {
@@ -103,7 +112,21 @@ export const routes: Routes = [
         path: "show-produit/:id",
         component: GestionnaireShowProduitPageComponent,
         /*canActivate:[isLoggedInGuard]*/
-      }
+      },
+      {
+        path: "list-promotions",
+        component: GestionnairePromotionListPageComponent,
+      },
+      {
+        path: "create-promotion",
+        component: GestionnaireCreatePromotionPageComponent,
+        /*canActivate:[isLoggedInGuard]*/
+      },
+      {
+        path: "show-promotion/:id",
+        component: GestionnaireShowPromotionComponent,
+        /*canActivate:[isLoggedInGuard]*/
+      },
     ]
   },
   {
