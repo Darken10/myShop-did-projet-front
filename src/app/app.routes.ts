@@ -42,6 +42,15 @@ import {
 import {
   GestionnaireShowPromotionComponent
 } from "./pages/gestionnaire/gestionnaire-show-promotion/gestionnaire-show-promotion.component";
+import {
+  GestionnaireListeRavitaillementComponent
+} from "./pages/gestionnaire/gestionnaire-liste-ravitaillement/gestionnaire-liste-ravitaillement.component";
+import {
+  GestionnaireCreateRavitaillementComponent
+} from "./pages/gestionnaire/gestionnaire-create-ravitaillement/gestionnaire-create-ravitaillement.component";
+import {
+  GestionnaireShowRavitaillementComponent
+} from "./pages/gestionnaire/gestionnaire-show-ravitaillement/gestionnaire-show-ravitaillement.component";
 
 export const routes: Routes = [
   {
@@ -95,9 +104,13 @@ export const routes: Routes = [
     /*canActivate:[isLoggedInGuard],*/
     children:[
       {
-        path: "",
+        path: "dashbord",
         component: GestionnaireDashbordPageComponent,
-        /*canActivate:[isLoggedInGuard]*/
+      },
+      {
+        path: "",
+        redirectTo :"/gestionnaire/dashbord",
+        pathMatch : "full"
       },
       {
         path: "list-produits",
@@ -106,12 +119,10 @@ export const routes: Routes = [
       {
         path: "create-produit",
         component: GestionnaireCreateProduitPageComponent,
-        /*canActivate:[isLoggedInGuard]*/
       },
       {
         path: "show-produit/:id",
         component: GestionnaireShowProduitPageComponent,
-        /*canActivate:[isLoggedInGuard]*/
       },
       {
         path: "list-promotions",
@@ -120,12 +131,22 @@ export const routes: Routes = [
       {
         path: "create-promotion",
         component: GestionnaireCreatePromotionPageComponent,
-        /*canActivate:[isLoggedInGuard]*/
       },
       {
         path: "show-promotion/:id",
         component: GestionnaireShowPromotionComponent,
-        /*canActivate:[isLoggedInGuard]*/
+      },
+      {
+        path: "list-ravitaillements",
+        component: GestionnaireListeRavitaillementComponent,
+      },
+      {
+        path: "create-ravitaillement",
+        component: GestionnaireCreateRavitaillementComponent,
+      },
+      {
+        path: "show-ravitaillement/:id",
+        component: GestionnaireShowRavitaillementComponent,
       },
     ]
   },
@@ -137,12 +158,10 @@ export const routes: Routes = [
         {
           path: "",
           component: CaissierDashbordPageComponent,
-          /*canActivate:[isLoggedInGuard]*/
         },
       {
         path: "produits-list",
         component: CaissierProduitListPageComponent,
-        /*canActivate:[isLoggedInGuard]*/
       }
       ]
   },

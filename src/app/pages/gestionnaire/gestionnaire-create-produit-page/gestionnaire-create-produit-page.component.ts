@@ -1,7 +1,7 @@
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {CategoryService} from "../../../services/produit/category/category.service";
-import {ICategory} from "../../../../models/Interfaces";
+import {ICategory, ITag} from "../../../../models/Interfaces";
 import {TagService} from "../../../services/produit/tag/tag.service";
 import {Subscription} from "rxjs";
 import {UniteProduitEnum} from "../../../../models/Enums";
@@ -9,6 +9,7 @@ import {UniteProduitEnumValues} from "../../../../functions/getEnumValues";
 import {Category, Tag} from "../../../../models/interfaceRequest";
 import {ProduitService} from "../../../services/produit/produit/produit.service";
 import {Router} from "@angular/router";
+import {AlertService} from "../../../services/global/alert.service";
 
 @Component({
   selector: 'app-gestionnaire-create-produit-page',
@@ -24,24 +25,22 @@ export class GestionnaireCreateProduitPageComponent implements OnInit,OnDestroy{
   private categoryService:CategoryService = inject(CategoryService)
   private tagService:TagService = inject(TagService)
   private produitService:ProduitService = inject(ProduitService)
+  private alertService:AlertService = inject(AlertService)
   private router:Router = inject(Router)
-  private getTagsSubcription: Subscription|null = null
-  private getCategoriesSubcription: Subscription|null = null
-  private postTagsSubcription: Subscription|null = null
-  private postCategoriesSubcription: Subscription|null = null
-  private postProduitSubcription: Subscription|null = null
+  private subscription: Subscription = new Subscription()
   protected readonly UniteProduitEnumValues = UniteProduitEnumValues;
 
   categories:ICategory[] = []
-  tags:ICategory[] = []
+  tags:ITag[] = []
   produitCreateForm: FormGroup = new FormGroup({
     libelle: new FormControl<String>(''),
     description: new FormControl<String>(''),
-    prix: new FormControl<String>(''),
+    prix: new FormControl<number>(0),
+    reference: new FormControl<String>(''),
     stock: new FormControl<number>(0),
     seuil: new FormControl<number>(0),
     image: new FormControl<any>(null),
-    categoryId: new FormControl<String>(''),
+    categoryId: new FormControl<number>(0),
     tagsId: new FormControl<number[]>([]),
     unite: new FormControl<UniteProduitEnum>(UniteProduitEnum.UNITE),
   })
@@ -58,36 +57,39 @@ export class GestionnaireCreateProduitPageComponent implements OnInit,OnDestroy{
 
 
   ngOnInit(): void {
-    this.getCategoriesSubcription = this.categoryService.findAll().subscribe((cat)=>{
+    const subscribeCat = this.categoryService.findAll().subscribe((cat)=>{
       this.categories = cat
     })
-    this.getTagsSubcription = this.tagService.findAll().subscribe((tags)=>{
+    this.subscription.add(subscribeCat)
+    const subscribeTag= this.tagService.findAll().subscribe((tags)=>{
       this.tags = tags
     })
+    this.subscription.add(subscribeTag)
 
   }
   ngOnDestroy(): void {
-    this.getCategoriesSubcription?.unsubscribe()
-    this.getTagsSubcription?.unsubscribe()
-    this.postTagsSubcription?.unsubscribe()
-    this.postCategoriesSubcription?.unsubscribe()
-    this.postProduitSubcription?.unsubscribe()
+    this.subscription.unsubscribe()
   }
 
   handleCreateProduit() {
     const data = this.produitCreateForm.value
-    this.postProduitSubcription = this.produitService.create(data).subscribe((prod)=>{
+    const subscribe  = this.produitService.create(data).subscribe((prod)=>{
       if (prod){
         this.produitCreateForm.reset()
-        this.router.navigate(["/gestionnaire/show-produit/"+prod.id])
+        this.router.navigate(["/gestionnaire/show-produit/" + prod.id]).then(r  =>console.log("navigation vers show-produit"))
+        this.alertService.show({
+          type : 'success',
+          message : 'Le produit a bien été créé'
+        })
       }
     })
+    this.subscription.add(subscribe)
     console.log(this.produitCreateForm.value)
   }
 
   handleCreateCategorie() {
     const data = this.categoryCreateForm.value as Category
-    this.postCategoriesSubcription = this.categoryService.create(data).subscribe((cat)=>{
+    const subscribe = this.categoryService.create(data).subscribe((cat)=>{
       if (cat){
         this.categories = [...this.categories,cat]
         this.produitCreateForm.patchValue({categoryId: cat.id})
@@ -95,17 +97,19 @@ export class GestionnaireCreateProduitPageComponent implements OnInit,OnDestroy{
 
       }
     })
+    this.subscription.add(subscribe)
   }
 
   handleCreateTag() {
     const data = this.tagCreateForm.value as Tag
-    this.postCategoriesSubcription = this.tagService.create(data).subscribe((tag)=>{
+    const subscribe = this.tagService.create(data).subscribe((tag)=>{
       if (tag){
         this.tags = [...this.categories,tag]
         this.produitCreateForm.patchValue({tagsId: [...this.produitCreateForm.get('tagsId')?.value,tag.id]})
         this.tagCreateForm.reset()
       }
     })
+    this.subscription.add(subscribe)
   }
 
   onImageChange(event:Event){

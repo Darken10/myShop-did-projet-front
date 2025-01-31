@@ -42,7 +42,7 @@
         <h3 class="mb-4 text-xl font-semibold dark:text-white">Produit :  {{produit?.libelle}}</h3>
         <hr>
         <div class="mt-4">
-          <div class="grid gap-6 mb-6 md:grid-cols-2">
+          <div class="grid gap-6 mb-6 md:grid-cols-3">
             <div>
               <div class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Nom</div>
               <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{produit?.libelle}}</div>
@@ -51,10 +51,14 @@
               <div class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Categorie</div>
               <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{produit?.category?.name}}</div>
             </div>
+            <div>
+              <div class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Reference</div>
+              <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{produit?.reference ?? "-"}}</div>
+            </div>
           </div>
           <div class="mb-6">
             <div class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">Description</div>
-            <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{produit?.description}}</div>
+            <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{produit?.description ?? "-"}}</div>
           </div>
 
           <div class="grid gap-6 mb-6 md:grid-cols-2">

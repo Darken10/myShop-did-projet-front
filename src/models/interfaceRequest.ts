@@ -1,4 +1,4 @@
-import {UniteProduitEnum} from "./Enums";
+import {MethodePaiementEnum, StatusPaiementEnum, UniteProduitEnum} from "./Enums";
 
 export interface Produit {
   libelle: string;
@@ -11,7 +11,6 @@ export interface Produit {
   unite : UniteProduitEnum
   seuil :number;
 }
-
 
 export interface Category {
   name: string;
@@ -32,4 +31,33 @@ export interface Promotion {
   startDate: Date;
   endDate: Date;
   produitsId: number[];
+}
+
+export interface LigneRavitaillement {
+  quantite: number;
+  produitId: number;
+}
+
+export interface Fournisseur {
+  name: string;
+  address: string;
+  phoneNumber: string;
+  email: string;
+}
+
+export interface Ravitaillement {
+  createDate?: Date;
+  deliveredDate?: Date;
+  status: string;
+  fournisseurId: number;
+}
+
+export interface Paiement {
+  methode: MethodePaiementEnum;
+  reference: string;
+  amount: number;
+  date: string;
+  status: StatusPaiementEnum;
+  comment: string;
+  commandeId: number;
 }
