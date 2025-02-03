@@ -1,4 +1,4 @@
-import {MethodePaiementEnum, StatusPaiementEnum, UniteProduitEnum} from "./Enums";
+import {CommandeStatutEnum, MethodePaiementEnum, StatusPaiementEnum, UniteProduitEnum} from "./Enums";
 
 export interface Produit {
   libelle: string;
@@ -36,6 +36,7 @@ export interface Promotion {
 export interface LigneRavitaillement {
   quantite: number;
   produitId: number;
+  prixUnitaire : number
 }
 
 export interface Fournisseur {
@@ -43,6 +44,7 @@ export interface Fournisseur {
   address: string;
   phoneNumber: string;
   email: string;
+  description? : string
 }
 
 export interface Ravitaillement {
@@ -60,4 +62,27 @@ export interface Paiement {
   status: StatusPaiementEnum;
   comment: string;
   commandeId: number;
+}
+
+
+export interface LigneCommandes {
+  prixUnitaire: number;
+  quantity: number;
+  produitId: number;
+  promotionsId?: number;
+}
+
+export interface Commande {
+  clientId: number;
+  description: string;
+  status: CommandeStatutEnum;
+  ligneCommandes: LigneCommandes[];
+}
+
+
+export interface Client {
+  name: string;
+  phone?: string;
+  solde?: number;
+  adress?: string;
 }

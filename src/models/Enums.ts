@@ -38,3 +38,11 @@ export enum StatusPaiementEnum {
   EN_ATTENTE = "EN_ATTENTE",
   CANCELED = "CANCELED"
 }
+
+export enum CommandeStatutEnum{
+  NEW = "NEW",
+  DELIVERED = "DELIVERED",
+  PROCESSED = "PROCESSED",
+  SHIPPED = "SHIPPED",
+  CANCELED = "CANCELED",
+}

@@ -1,4 +1,4 @@
-import {Genre, UniteProduitEnum, UserStatusEnum} from "./Enums";
+import {CommandeStatutEnum, Genre, StatusPaiementEnum, UniteProduitEnum, UserStatusEnum} from "./Enums";
 
 
 export interface ICategory {
@@ -30,6 +30,7 @@ export interface IProduitMini{
   prix: number;
   stock: number;
   unite: UniteProduitEnum;
+  category : ICategory
 
 }
 
@@ -80,7 +81,8 @@ export interface IFounisseur {
 export interface ILigneRavitaillementsMini {
   id: number;
   quantite: number;
-  produit: IProduit;
+  produit: IProduitMini;
+  prixUnitaire : number
 }
 
 export interface ILigneRavitaillements extends ILigneRavitaillementsMini{
@@ -91,6 +93,7 @@ export interface IRavitaillement {
   id: number;
   createDate: Date;
   deliveredDate: Date;
+  description : string
   status: string;
   founisseur: IFounisseur;
   ligneRavitaillements: ILigneRavitaillementsMini[];
@@ -102,6 +105,23 @@ export interface Ipaiement {
   reference: string;
   amount: number;
   date: string;
-  status: string;
+  status: StatusPaiementEnum;
   comment: string;
+}
+
+export interface IClient {
+  id: number;
+  name: string;
+  phone: string;
+  solde: number;
+  adress: string;
+}
+
+export interface ICommande {
+  id: number;
+  client: IClient;
+  description: string;
+  status: CommandeStatutEnum;
+  paiements: Ipaiement[];
+  createAt: string;
 }

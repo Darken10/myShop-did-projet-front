@@ -51,6 +51,7 @@ import {
 import {
   GestionnaireShowRavitaillementComponent
 } from "./pages/gestionnaire/gestionnaire-show-ravitaillement/gestionnaire-show-ravitaillement.component";
+import {CaisseCreateCommandeComponent} from "./pages/caissier/caisse-create-commande/caisse-create-commande.component";
 
 export const routes: Routes = [
   {
@@ -162,6 +163,10 @@ export const routes: Routes = [
       {
         path: "produits-list",
         component: CaissierProduitListPageComponent,
+      },
+      {
+        path: "create-commande",
+        component: CaisseCreateCommandeComponent,
       }
       ]
   },
