@@ -39,7 +39,7 @@ export class LoginPageComponent implements OnDestroy{
         next:((res:IUser|null|undefined)=>{
           if (res){
             this.invalideCredential = false
-            this.router.navigate(['/']).then(_ => {
+            this.router.navigate(['/'],{onSameUrlNavigation:'reload'}).then(_ => {
               console.log(res)
               this.alertService.show({
                 type : "success",

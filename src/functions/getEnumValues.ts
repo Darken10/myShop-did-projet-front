@@ -1,4 +1,4 @@
-import {UniteProduitEnum} from "../models/Enums";
+import {CommandeStatutEnum, UniteProduitEnum} from "../models/Enums";
 
 export const UniteProduitEnumValues = [
   UniteProduitEnum.KG,
@@ -7,3 +7,13 @@ export const UniteProduitEnumValues = [
   UniteProduitEnum.SAC,
   UniteProduitEnum.UNITE ,
 ]
+
+export const StatutCommandeEnumValues = [
+  CommandeStatutEnum.NEW,
+  CommandeStatutEnum.CANCELED,
+  CommandeStatutEnum.PROCESSED,
+  CommandeStatutEnum.SHIPPED,
+  CommandeStatutEnum.DELIVERED,
+
+]
+

@@ -1,15 +1,12 @@
 import {Component, inject} from '@angular/core';
 import {ProduitService} from "../../../services/produit/produit/produit.service";
-import {IClient, IProduit} from "../../../../models/Interfaces";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {Modal, ModalOptions} from 'flowbite';
+import {IProduit} from "../../../../models/Interfaces";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommandeService} from "../../../services/produit/commande/commande.service";
-import {ClientService} from "../../../services/produit/client/client.service";
 import {Router} from "@angular/router";
 import {FactureService} from "../../../services/global/facture/facture.service";
 import {AlertService} from "../../../services/global/alert.service";
-import {Commande, LigneCommandes} from "../../../../models/interfaceRequest";
-import {CommandeStatutEnum} from "../../../../models/Enums";
+import {CartService} from "../../../services/cart/cart.service";
 
 @Component({
   selector: 'app-caissier-produit-list-page',
@@ -25,50 +22,19 @@ export class CaissierProduitListPageComponent {
 
   private  produitService: ProduitService = inject(ProduitService)
   private  commandeService: CommandeService = inject(CommandeService)
-  private  clientService: ClientService = inject(ClientService)
   private  factureService: FactureService = inject(FactureService)
   private  alertService: AlertService = inject(AlertService)
   private  router: Router = inject(Router)
+  private  cartService: CartService = inject(CartService)
 
   cartProduits: Map<number, {quantite: number,produit: IProduit}> = new Map()
   produits : IProduit[] = []
   produit : IProduit | undefined = undefined
   displayProduits : IProduit[] = []
-  clients: IClient[] = [];
-  createCommandeForm : FormGroup = new FormGroup({
-    isNewClient : new FormControl(''),
-    client : new FormGroup({
-      name : new FormControl(''),
-      phone : new FormControl(''),
-      adress : new FormControl(''),
-      solde  : new FormControl(0)
-    }),
-    clientId : new FormControl<number>(0),
-  })
-
-  commandeForm : FormGroup = new FormGroup({
-    isNewClient : new FormControl(''),
-  })
-
 
   currentPage  = 1;
   pageSize = 3
-  /*
-    $targetEl = null;
-    options:ModalOptions = {
-      placement: 'bottom-right',
-      backdrop: 'dynamic',
-      backdropClasses: 'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40',
-      closable: true,
-    };
-    instanceOptions = {
-      id: 'voir-prouit-info',
-      override: true
-    };
 
-    modal = new Modal(this.$targetEl, this.options, this.instanceOptions);
-
-  */
 
 
 
@@ -79,16 +45,9 @@ export class CaissierProduitListPageComponent {
       console.log(this.produits)
       this.updateDisplayProduit()
     })
-    this.clientService.findAll().subscribe((cls)=>{
-      this.clients = cls
-    })
-
     this.commandeService.findAll().subscribe(a=>{
       console.log(a)
     })
-
-
-
   }
 
   updateDisplayProduit(){
@@ -133,7 +92,6 @@ export class CaissierProduitListPageComponent {
   getProduit(id: number): IProduit{
     return <IProduit>this.produits.find((p) => p.id === id)
   }
-
   onQuantiteChangeByInput($event: Event, id: number) {
     const inputValue = ($event.target as HTMLInputElement).value
     const quantite = Number(inputValue)
@@ -147,78 +105,18 @@ export class CaissierProduitListPageComponent {
 
   }
 
-  getTotalPriceByProduct(id: number){
-    const cartProduit = this.cartProduits.get(id)
-    if (cartProduit){
-      return cartProduit?.quantite*cartProduit?.produit?.prix as number
-    } else {
-      return 0
-    }
-  }
-
-  getGobaleTotalPrice(){
-    let somme = 0
-    this.cartProduits.forEach((a)=>{
-      somme =  somme + this.getTotalPriceByProduct(a.produit.id)
-    })
-    return somme
-  }
-
-  EnregistreVente() {
-    // TODO :  je doit enregistrer la vente
-    /*this.commandeService.create()*/
-    const creadential:Commande = this.getCredential()
-    this.commandeService.create(creadential).subscribe((com)=>{
-      if (com){
-        this.factureService.generateFacture().subscribe(etat=>{
-          if (etat){
-            this.alertService.show({
-              type : "success",
-              message : "La facture a ete bien genere"
-            })
-          }
-        })
-      }
-      else {
-        this.alertService.show({
-          type : "error",
-          message : "Une erreur inatendu est arrive lors de la generation"
-        })
-      }
-
-    })
-
-    this.cartProduits.clear()
-  }
-
   openProduitInfoModal(proId:number) {
 /*    this.modal._targetEl =  document.getElementById('voir-prouit-info')
     this.modal.show()*/
     this.produit = this.produits.find((a)=>a.id===proId)
-
-  }
-
-  getCredential (): Commande{
-    const credential:Commande = {
-      clientId: this.createCommandeForm.value.clientId,
-      description: "",
-      status: CommandeStatutEnum.NEW,
-      ligneCommandes: []
-    }
-    this.cartProduits.forEach((p)=>{
-      credential.ligneCommandes.push({
-        prixUnitaire: p.produit.prix,
-        produitId: p.produit.id,
-        quantity: p.quantite
-       /* promotionsId: , */
-      })
-    })
-    console.log(credential)
-    return credential
   }
 
   gotoFacture() {
-
-    this.router.navigate(["/create-commande",{cart : this.cartProduits}])
+    this.cartProduits.forEach((value, key, map)=>{
+      this.cartService.addProduit(key,value)
+    })
+    this.router.navigate(["/create-commande"])
   }
+
+
 }

@@ -10,7 +10,7 @@ import {Client} from "../../../../models/interfaceRequest";
 })
 export class ClientService {
   http:HttpClient = inject(HttpClient)
-  private apiUrl:string = `${ApiUrl.BASE_URL}/categories`
+  private apiUrl:string = `${ApiUrl.BASE_URL}/clients`
   constructor() { }
 
   findAll(): Observable<IClient[]> {

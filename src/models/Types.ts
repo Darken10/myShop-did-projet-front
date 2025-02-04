@@ -1,3 +1,5 @@
+import {IProduit, IPromotion} from "./Interfaces";
+
 export type LoginCredentialType = {
   matricule: string;
   password: string;
@@ -8,3 +10,5 @@ export type AlertType = {
   message : string,
   time? : number
 }
+
+export type CartDataType = { quantite: number; produit: IProduit,promotion?:IPromotion }
