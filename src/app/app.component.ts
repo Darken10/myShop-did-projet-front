@@ -19,21 +19,13 @@ import {ScannerComponent} from "./component/scanner/scanner/scanner.component";
 })
 export class AppComponent implements OnInit {
   title = 'myShop';
-   private platformId: Object = inject(PLATFORM_ID);
    private router:Router = inject(Router)
 
   ngOnInit() {
+    initFlowbite()
      this.router.events.subscribe(event=>{
-       if (event instanceof NavigationEnd){
-         setTimeout(()=>{
-           this.initScripts()
-         },100)
-       }
+       this.initScripts()
      })
-    if (isPlatformBrowser(this.platformId)) {
-      // Code dépendant du navigateur (comme Flowbite)
-      initFlowbite(); // Appelle la méthode si nécessaire
-    }
 
   }
 

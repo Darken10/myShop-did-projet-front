@@ -9,20 +9,13 @@ import {isPlatformBrowser} from "@angular/common";
   templateUrl: './caissier-dashbord-page.component.html',
   styleUrl: './caissier-dashbord-page.component.css'
 })
-export class CaissierDashbordPageComponent/* implements AfterViewInit*/{
-
-  /*private isBrowser: Boolean
-  private plateformId = inject(PLATFORM_ID)
-
-  constructor() {
-    this.isBrowser = isPlatformBrowser(this.plateformId)
-  }
+export class CaissierDashbordPageComponent implements OnInit{
 
 
   ngOnInit(): void {
+        this.salesThisWeek()
+    }
 
-
-  }
 
 
   salesThisWeek(){
@@ -178,13 +171,4 @@ export class CaissierDashbordPageComponent/* implements AfterViewInit*/{
     };
   }
 
-  ngAfterViewInit(): void {
-    if (this.isBrowser){
-      import('apexcharts').then((module)=>{
-       this.salesThisWeek()
-      })
-    }
-  }
-
-*/
 }
