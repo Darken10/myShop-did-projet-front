@@ -58,10 +58,10 @@ export interface Paiement {
   methode: MethodePaiementEnum;
   reference: string;
   amount: number;
-  date: string;
-  status: StatusPaiementEnum;
-  comment: string;
   commandeId: number;
+  status: StatusPaiementEnum;
+  date?: Date;
+  comment?: string;
 }
 
 

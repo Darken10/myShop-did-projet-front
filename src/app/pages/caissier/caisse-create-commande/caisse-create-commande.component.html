@@ -73,10 +73,10 @@
                     <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Le Statut</label>
                     <select formControlName="status" name="status" id="status" required class="bg-gray-50 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
                       <option [value]="CommandeStatutEnum.NEW">Nouveau</option>
-                      <option [value]="CommandeStatutEnum.SHIPPED">Payer et Non Livrer</option>
-                      <option [value]="CommandeStatutEnum.PROCESSED">En Cours de Livraison</option>
+                      <option [value]="CommandeStatutEnum.SHIPPED">Expédier</option>
+                      <option [value]="CommandeStatutEnum.PROCESSED">Traite</option>
                       <option [value]="CommandeStatutEnum.DELIVERED">Livrer</option>
-                      <option [value]="CommandeStatutEnum.CANCELED">Annuller</option>
+                      <option [value]="CommandeStatutEnum.CANCELED">Annuler</option>
                     </select>
                   </div>
                 </div>
@@ -91,6 +91,56 @@
               </div>
 
             </form>
+            @if (createCommandeForm.value.status !==CommandeStatutEnum.NEW){
+              <form [formGroup]="createPaiementForm">
+                <h3 class="text-xl">Les information du paiement</h3>
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                  <div>
+                    <div class="mt-2">
+                      <label for="methode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">La Methode de paiement</label>
+                      <select formControlName="methode" name="methode" id="methode" required class="bg-gray-50 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                        <option [value]="MethodePaiementEnum.ESPECE">Espèce</option>
+                        <option [value]="MethodePaiementEnum.CARTE">Carte</option>
+                        <option [value]="MethodePaiementEnum.MOBILE_MONEY">Mobile Money</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div >
+                    <label for="reference" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">La reference</label>
+                    <input type="text" formControlName="reference" name="reference" id="reference"
+                           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                           placeholder="La reference " required>
+
+                  </div>
+                </div>
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                  <div class=" w-full ">
+                    <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Le Montant</label>
+                    <input type="text" formControlName="amount" name="amount" id="amount"
+                           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                           placeholder="Le Montant " required>
+
+                  </div>
+                  <div>
+                    <div class="mt-2">
+                      <label for="PaiementStatus" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Le Statut</label>
+                      <select formControlName="status" name="status" id="PaiementStatus" required class="bg-gray-50 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                        <option [value]="StatusPaiementEnum.PAYER">Payer</option>
+                        <option [value]="StatusPaiementEnum.EN_ATTENTE">En Attente</option>
+                        <option [value]="StatusPaiementEnum.CANCELED">Annuler</option>
+                      </select>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="mb-6">
+                  <label for="comment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                  <textarea id="comment" formControlName="comment" rows="4"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="La desciption "></textarea>
+                </div>
+              </form>
+            }
           </div>
         </div>
 
@@ -106,6 +156,9 @@
                   </th>
                   <th scope="col" class="px-6 py-3">
                     Quantite
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    Promotion
                   </th>
                   <th scope="col" class="px-6 py-3 rounded-e-lg">
                     Prix
@@ -141,8 +194,17 @@
                         </div>
                       </td>
                       <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                        <select  (change)="onChangePromotionListe($event,cp.produit.id)" name="promotionsActiveId" id="promotionsActiveId" required class="bg-gray-50 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                          <option value="0">Selectionner les promotions</option>
+                          @for (promotion of cp.produit.promotions;track promotion.id){
+                            <option [value]="promotion.id">{{promotion.name}}</option>
+                          }
+                        </select>
+                      </td>
+                      <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                         {{getTotalPriceByProduct(cp.produit.id)}} XOF
                       </td>
+
                     </tr>
                   }
 
@@ -150,6 +212,7 @@
                 <tfoot>
                 <tr class="font-bold text-gray-900 dark:text-white">
                   <th scope="row" class="px-6 py-3 text-base">Total</th>
+                  <td class="px-6 py-3"></td>
                   <td class="px-6 py-3"></td>
                   <td class="px-6 py-3">{{getGobaleTotalPrice()}} XOF</td>
                 </tr>
@@ -161,6 +224,7 @@
           </div>
           <div class="flex items-center justify-between p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
             <button  type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>
+            <button  type="button" (click)="generateFacture()" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">generer facture</button>
             <button  (click)="EnregistreVente()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
           </div>
 

@@ -11,4 +11,4 @@ export type AlertType = {
   time? : number
 }
 
-export type CartDataType = { quantite: number; produit: IProduit,promotion?:IPromotion }
+export type CartDataType = { quantite: number; produit: IProduit,promotion?:IPromotion|undefined, prixUnitaire?:number|undefined }

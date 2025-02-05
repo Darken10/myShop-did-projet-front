@@ -52,6 +52,12 @@ import {
   GestionnaireShowRavitaillementComponent
 } from "./pages/gestionnaire/gestionnaire-show-ravitaillement/gestionnaire-show-ravitaillement.component";
 import {CaisseCreateCommandeComponent} from "./pages/caissier/caisse-create-commande/caisse-create-commande.component";
+import {
+  CaisseCommandeListPageComponent
+} from "./pages/caissier/caisse-commande-list-page/caisse-commande-list-page.component";
+import {
+  CaisseShowCommandePageComponent
+} from "./pages/caissier/caisse-show-commande-page/caisse-show-commande-page.component";
 
 export const routes: Routes = [
   {
@@ -160,14 +166,22 @@ export const routes: Routes = [
           path: "",
           component: CaissierDashbordPageComponent,
         },
-      {
-        path: "produits-list",
-        component: CaissierProduitListPageComponent,
-      },
-      {
-        path: "create-commande",
-        component: CaisseCreateCommandeComponent,
-      }
+        {
+          path: "produits-list",
+          component: CaissierProduitListPageComponent,
+        },
+        {
+          path: "create-commande",
+          component: CaisseCreateCommandeComponent,
+        },
+        {
+          path: "list-commande",
+          component: CaisseCommandeListPageComponent,
+        },
+        {
+          path: "show-commande/:id",
+          component: CaisseShowCommandePageComponent,
+        },
       ]
   },
 

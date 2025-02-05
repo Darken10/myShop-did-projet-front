@@ -123,5 +123,16 @@ export interface ICommande {
   description: string;
   status: CommandeStatutEnum;
   paiements: Ipaiement[];
+  ligneCommandes: ILigneCommande[];
   createAt: string;
+  user : IUser
+}
+
+
+export interface ILigneCommande {
+  id: number;
+  prixUnitaire: number;
+  quantity: number;
+  promotion : IPromotion
+  produit: IProduitMini;
 }

@@ -42,11 +42,7 @@ export class CaissierProduitListPageComponent {
    /* this.modal._targetEl = document.getElementById('voir-prouit-info')*/
     this.produitService.findAll().subscribe((prod)=>{
       this.produits = prod
-      console.log(this.produits)
       this.updateDisplayProduit()
-    })
-    this.commandeService.findAll().subscribe(a=>{
-      console.log(a)
     })
   }
 

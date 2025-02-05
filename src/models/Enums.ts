@@ -40,9 +40,9 @@ export enum StatusPaiementEnum {
 }
 
 export enum CommandeStatutEnum{
-  NEW = "NEW",
-  DELIVERED = "DELIVERED",
-  PROCESSED = "PROCESSED",
-  SHIPPED = "SHIPPED",
-  CANCELED = "CANCELED",
+  NEW = "NEW",              // Nouveau
+  DELIVERED = "DELIVERED", // Livre
+  PROCESSED = "PROCESSED", // Traite
+  SHIPPED = "SHIPPED",     // Expédier
+  CANCELED = "CANCELED",   // Annuler
 }
