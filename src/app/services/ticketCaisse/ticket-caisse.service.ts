@@ -210,7 +210,6 @@ export class TicketCaisseService {
 
   getTotalPriceByProduct(ligne: ILigneCommande) {
     if (ligne.promotion){
-    console.log('ligne : ',ligne)
       if (ligne.promotion.isPercent ){
         return  (ligne.prixUnitaire + ligne.prixUnitaire * ligne.promotion.reduction/100)*ligne.quantity
       } else {

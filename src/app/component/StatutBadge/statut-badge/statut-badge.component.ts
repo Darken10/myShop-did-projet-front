@@ -10,5 +10,8 @@ import {CommandeStatutEnum, StatusPaiementEnum} from "../../../../models/Enums";
 })
 export class StatutBadgeComponent {
 
-    statut  = input<CommandeStatutEnum|StatusPaiementEnum>()
+  statut  = input<CommandeStatutEnum|StatusPaiementEnum>()
+  text = input<string>()
+  protected readonly StatusPaiementEnum = StatusPaiementEnum;
+  protected readonly CommandeStatutEnum = CommandeStatutEnum;
 }

@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ApiUrl} from "../../../../constantes/ApiUrl";
 import {catchError, Observable, of} from "rxjs";
-import {ICommande} from "../../../../models/Interfaces";
+import {ICommande, IProduit} from "../../../../models/Interfaces";
 import {Commande} from "../../../../models/interfaceRequest";
 
 @Injectable({
@@ -28,6 +28,16 @@ export class CommandeService {
       .pipe(
         catchError(error => {
           console.error('Erreur lors du Post:', error);
+          return of(null);
+        })
+      );
+  }
+
+  public find(id:number):Observable<ICommande|null>{
+    return this.http.get<ICommande>(`${this.apiUrl}/${id}`)
+      .pipe(
+        catchError(error => {
+          console.error('Erreur lors du fetch:', error);
           return of(null);
         })
       );

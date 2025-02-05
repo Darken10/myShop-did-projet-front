@@ -110,6 +110,9 @@
               Numero
             </th>
             <th scope="col" class="px-6 py-3">
+              Statut
+            </th>
+            <th scope="col" class="px-6 py-3">
               Paiement
             </th>
             <th scope="col" class="px-6 py-3">
@@ -135,9 +138,19 @@
                     {{commande.description}}
                   </div>
                 </td>
+                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                  <app-statut-badge [statut]="commande.status" text="{{commande.status}}" />
+                </td>
                 <td class="px-6 py-4">
                   <div class="flex items-center">
-                    {{"---"}}
+                    @if (commande.paiements.length>0) {
+                      @for (paie of commande.paiements; track paie.id){
+                        {{paie.methode ?? '-'}}
+                      }
+                    } @else {
+                      -
+                    }
+
                   </div>
                 </td>
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
@@ -146,10 +159,10 @@
                   </div>
                 </td>
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-
+                  {{ticketService.getGobaleTotalPrice(commande.ligneCommandes)}} XOF
                 </td>
                 <td class="px-6 py-4">
-                  <button type="button" class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">Voir</button>
+                  <button type="button" routerLink="/show-commande/{{commande.id}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">Voir</button>
                 </td>
               </tr>
             }

@@ -80,6 +80,7 @@ export class CaisseCreateCommandeComponent implements OnInit,OnDestroy{
   getCredential (): Commande{
     const credential:Commande = {
       ...this.createCommandeForm.value,
+      status : this.createCommandeForm.value.status,
       ligneCommandes: []
     }
     this.cartProduits.forEach((p)=>{
@@ -88,7 +89,6 @@ export class CaisseCreateCommandeComponent implements OnInit,OnDestroy{
         produitId: p.produit.id,
         quantity: p.quantite,
         promotionsId : p.promotion?.id
-        /* promotionsId: , */
       })
     })
     return credential
