@@ -4,14 +4,7 @@ import {Token} from "../../constantes/Token";
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
 
   let request=req;
-  let token: String|null = null
-  if (typeof localStorage!== "undefined"){
-  token=localStorage.getItem("token");
-  console.log('Localstorage')
-
-  } else {
-    token = Token.TOKEN
-  }
+  const token=localStorage.getItem("token");
 
   if (token){
     const  headers = req.headers.set("Authorization",'Bearer '+token);

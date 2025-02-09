@@ -5,6 +5,7 @@ import {RouterLink} from "@angular/router";
 import {CommandeService} from "../../../services/produit/commande/commande.service";
 import {TicketCaisseService} from "../../../services/ticketCaisse/ticket-caisse.service";
 import {StatutBadgeComponent} from "../../../component/StatutBadge/statut-badge/statut-badge.component";
+import {CommandeStatutEnum, StatusPaiementEnum} from "../../../../models/Enums";
 
 @Component({
   selector: 'app-caisse-commande-list-page',
@@ -55,4 +56,7 @@ export class CaisseCommandeListPageComponent {
       this.updateDisplayCommande()
     }
   }
+
+    protected readonly CommandeStatutEnum = CommandeStatutEnum;
+    protected readonly StatusPaiementEnum = StatusPaiementEnum;
 }

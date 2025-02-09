@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import {LoginService} from "../../../services/auth/login.service";
+import {IUser} from "../../../../models/Interfaces";
 
 @Component({
   selector: 'app-gestionnaire-layout-page',
@@ -12,6 +14,16 @@ import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
   templateUrl: './gestionnaire-layout-page.component.html',
   styleUrl: './gestionnaire-layout-page.component.css'
 })
-export class GestionnaireLayoutPageComponent {
+export class GestionnaireLayoutPageComponent implements OnInit{
+
+  private loginService : LoginService = inject(LoginService)
+  user: IUser | null | undefined;
+
+  ngOnInit(): void {
+    this.loginService.getUser().subscribe(u=>{
+      this.user  = u
+    })
+  }
+
 
 }

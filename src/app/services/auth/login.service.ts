@@ -2,8 +2,9 @@ import {computed, inject, Injectable, signal} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ApiUrl} from "../../../constantes/ApiUrl";
 import {IUser} from "../../../models/Interfaces";
-import {map, Observable, tap} from "rxjs";
-import {LoginCredentialType} from "../../../models/Types";
+import {catchError, map, Observable, of, tap} from "rxjs";
+import {LoginCredentialType, NewPasswordCredentialType} from "../../../models/Types";
+
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class LoginService {
 
 
   getUser():Observable<IUser|null|undefined>{
-    return this.http.get<IUser>(this.apiUrl+"/user")
+    return this.http.get<IUser>(ApiUrl.BASE_URL+"/users/me")
       .pipe(
         tap((res:any)=>{
           this.user.set(res as IUser);
@@ -65,5 +66,15 @@ export class LoginService {
         return err;
       }
     })
+  }
+
+  changePassword(credential : NewPasswordCredentialType){
+    return this.http.post<IUser>(this.apiUrl+"/reset-password/new-password",credential)
+      .pipe(
+        catchError(error => {
+          console.error('Erreur lors du fetch:', error);
+          return of(null);
+        })
+      )
   }
 }

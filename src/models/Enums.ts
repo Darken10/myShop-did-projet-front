@@ -46,3 +46,10 @@ export enum CommandeStatutEnum{
   SHIPPED = "SHIPPED",     // Expédier
   CANCELED = "CANCELED",   // Annuler
 }
+
+
+export enum Role{
+  Admin = "Admin",
+  Caissier = "Caissier",
+  Gestionnaire = "Gestionnaire"
+}

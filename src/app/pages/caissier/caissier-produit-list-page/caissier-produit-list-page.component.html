@@ -46,10 +46,10 @@
         </div>
         <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
           <div class="flex items-center mb-4 sm:mb-0">
-            <form class="sm:pr-3" action="#" method="GET">
+            <form class="sm:pr-3" >
               <label for="products-search" class="sr-only">Search</label>
               <div class="relative w-48 mt-1 sm:w-64 xl:w-96">
-                <input type="text" name="email" id="products-search"
+                <input type="text" name="search" id="products-search" [formControl]="search" (keyup)="onChangeSearchField()"
                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                        placeholder="Search for products">
               </div>
@@ -139,11 +139,18 @@
             @for (produit of displayProduits; track produit.id) {
               <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <td class="p-4">
-                  <img src="images/hotel_{{$index+1}}.jpeg" class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch">
+                  @if (produit.image){
+                    <img [src]="produit.image"  alt="appercu de l'image" class="w-16 md:w-32 max-h-[120px]  " alt="Apple Watch">
+                  } @else {
+                    <img src="images/produit-default.jpeg" class="max-w-16 md:max-w-32 max-h-[120px] " alt="Apple Watch">
+                  }
                 </td>
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white max-w-[14rem]">
                   <div>
                     {{produit.libelle}}
+                  </div>
+                  <div class=" text-sm text-gray-500 italic font-normal truncate ">
+                    #{{produit.reference}}
                   </div>
                   <div class=" text-sm text-gray-500 italic font-normal truncate ">
                     {{produit.description}}
@@ -169,7 +176,7 @@
                   </div>
                 </td>
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                  {{produit.stock}}
+                  {{produit.stock}} {{produit.unite}}
                 </td>
                 <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                   {{produit.prix}} XOF

@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import autoTable from "jspdf-autotable";
 import QRCode from 'qrcode-generator';
 import jsPDF from "jspdf";
 import {ICommande, ILigneCommande} from "../../../models/Interfaces";
+import {StatusPaiementEnum} from "../../../models/Enums";
 
 
 @Injectable({
@@ -83,24 +84,30 @@ export class TicketCaisseService {
     // Totaux et mode de paiement
     doc.text(`Total: ${this.getGobaleTotalPrice(commande.ligneCommandes)} FCFA`, 10, finalY);
     finalY += 5;
+    doc.text(`=============================`, 10, finalY);
+    finalY += 5;
     commande.paiements.forEach((paye)=>{
-      doc.text(`Mode de paiement: ${paye.methode}`, 10, finalY);
+      doc.text(`${paye.methode} : ${paye.amount} XOF`, 10, finalY);
       finalY += 5;
-      doc.text(`Montant: ${paye.amount}`, 10, finalY);
+    })
+    doc.text(`---------------------------`, 10, finalY);
+    finalY += 5;
+    doc.text(`Total Payer : ${this.getMontantPayer(commande)} XOF`, 10, finalY);
+    finalY += 5;
+      doc.text(`Rest: ${this.getMontantRestant(commande)} XOF`, 10, finalY);
       finalY += 5;
       doc.text(`===============================`, 10, finalY);
       finalY += 5;
-    })
     doc.text('Merci pour votre confiance !', pageWidth / 2, finalY, { align: 'center' });
 
-    finalY += 10;
+    finalY += 5;
 
     // Génération du QR Code
     const qr = QRCode(4, 'L');
-    qr.addData(`${this.qrUrlBase}/${commande.id}`);
+    qr.addData(`${this.qrUrlBase}/user/show-commande/${commande.id}`);
     qr.make();
 
-    const qrSize = 40;
+    const qrSize = 20;
     const qrBase64 = qr.createDataURL(4);
 
     doc.addImage(qrBase64, 'PNG', (pageWidth - qrSize) / 2, finalY, qrSize, qrSize);
@@ -112,106 +119,10 @@ export class TicketCaisseService {
     console.log("commande",commande)
   }
 
-  async generateAndPrintTicket2(ticketData: any) {
-    const pageWidth = 80;
-    let pageHeight = 180;
-
-    const doc = new jsPDF({
-      unit: 'mm',
-      format: [pageWidth, pageHeight]
-    });
-
-    let y = 10;
-
-    // ✅ Utilisation de la police monospace pour tickets de caisse
-    doc.setFont('courier', 'bold');
-    doc.setFontSize(12);
-    doc.text('Mon Magasin', pageWidth / 2, y, { align: 'center' });
-    y += 5;
-    doc.setFontSize(9);
-    doc.setFont('courier', 'normal');
-    doc.text('123 Rue Commerce, Ville', pageWidth / 2, y, { align: 'center' });
-    y += 4;
-    doc.text('Tel: +226 12 34 56 78', pageWidth / 2, y, { align: 'center' });
-    y += 6;
-    doc.text('----------------------------', pageWidth / 2, y, { align: 'center' });
-
-    y += 5;
-    doc.text(`Date: ${ticketData.date}`, 10, y);
-    y += 4;
-    doc.text(`Caisse: ${ticketData.caisse}`, 10, y);
-    y += 4;
-    doc.text(`Ticket N°: ${ticketData.ticketNumber}`, 10, y);
-
-    y += 6;
-    doc.text('----------------------------', pageWidth / 2, y, { align: 'center' });
-    y += 5;
-
-    // ✅ Infos Client
-    doc.setFont('courier', 'bold');
-    doc.text('Client:', 10, y);
-    y += 4;
-    doc.setFont('courier', 'normal');
-    doc.text(`Nom: ${ticketData.client.name}`, 10, y);
-    y += 4;
-    doc.text(`Téléphone: ${ticketData.client.phone}`, 10, y);
-    y += 6;
-    doc.text('----------------------------', pageWidth / 2, y, { align: 'center' });
-    y += 5;
-
-    // ✅ Détails de la commande
-    doc.setFont('courier', 'bold');
-    doc.text('Commande:', 10, y);
-    y += 4;
-
-    autoTable(doc, {
-      startY: y,
-      head: [['Désignation', 'Qté', 'P.U', 'Total']],
-      body: ticketData.items.map((item: any) => [
-        item.name, item.quantity, `${item.price} FCFA`, `${item.total} FCFA`
-      ]),
-      theme: 'plain',
-      styles: { font: 'courier', fontSize: 9, cellPadding: 1 },
-      headStyles: { fontStyle: 'bold' }
-    });
-
-    let finalY = (doc as any).lastAutoTable.finalY + 5;
-    if (finalY > pageHeight) {
-      pageHeight = finalY + 40;
-      doc.internal.pageSize.height = pageHeight;
-    }
-
-    // ✅ Totaux et mode de paiement
-    doc.setFont('courier', 'bold');
-    doc.text(`Total: ${ticketData.total} FCFA`, 10, finalY);
-    finalY += 5;
-    doc.text(`Mode de paiement: ${ticketData.paymentMethod}`, 10, finalY);
-    finalY += 5;
-    doc.text('Merci pour votre visite !', pageWidth / 2, finalY, { align: 'center' });
-
-    finalY += 10;
-
-    // ✅ Génération du QR Code
-    const qr = QRCode(4, 'L');
-    qr.addData(ticketData.qrCodeData);
-    qr.make();
-
-    const qrSize = 40;
-    const qrBase64 = qr.createDataURL(4);
-
-    doc.addImage(qrBase64, 'PNG', (pageWidth - qrSize) / 2, finalY, qrSize, qrSize);
-
-    // ✅ Impression directe
-    doc.autoPrint();
-    const pdfUrl = doc.output('bloburl');
-    window.open(pdfUrl, '_blank');
-  }
-
-
   getTotalPriceByProduct(ligne: ILigneCommande) {
     if (ligne.promotion){
       if (ligne.promotion.isPercent ){
-        return  (ligne.prixUnitaire + ligne.prixUnitaire * ligne.promotion.reduction/100)*ligne.quantity
+        return  (ligne.prixUnitaire - ligne.prixUnitaire * ligne.promotion.reduction/100)*ligne.quantity
       } else {
         return ligne.quantity * ligne.promotion.reduction
       }
@@ -220,12 +131,32 @@ export class TicketCaisseService {
 
   }
 
-  getGobaleTotalPrice(lignes: ILigneCommande[]){
+  public getGobaleTotalPrice(lignes: ILigneCommande[]){
     let somme = 0
     lignes.forEach((ligne)=>{
       somme =  somme + this.getTotalPriceByProduct(ligne)
     })
     return somme
+  }
+
+  public getMontantPayer(commande : ICommande){
+    let somme  = 0
+    commande.paiements.forEach(paie=>{
+      if (paie.status!== StatusPaiementEnum.CANCELED )
+        somme = somme + paie.amount
+    })
+    return somme
+  }
+
+  public getMontantRestant(commande:ICommande){
+    return this.getGobaleTotalPrice(commande.ligneCommandes)-this.getMontantPayer(commande)
+  }
+
+  isTotaliePayer(commande:ICommande){
+    if (commande)
+      return this.getMontantPayer(commande)>= this.getGobaleTotalPrice(commande.ligneCommandes)
+        || this.getMontantRestant(commande)<=0
+    return false
   }
 
 }

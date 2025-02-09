@@ -1,0 +1,139 @@
+<div id="main-content" class="relative w-full h-full  bg-gray-50  dark:bg-gray-900">
+  <main>
+    <div
+      class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
+      <div class="w-full mb-1">
+        <div class="mb-4">
+          <nav class="flex mb-5" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
+              <li class="inline-flex items-center">
+                <a href="/"
+                   class="inline-flex items-center text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-white">
+                  <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20"
+                       xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                  </svg>
+                  Home
+                </a>
+              </li>
+              <li>
+                <div class="flex items-center">
+                  <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                       xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                          clip-rule="evenodd"></path>
+                  </svg>
+                  <a href="/admin/users"
+                     class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">users</a>
+                </div>
+              </li>
+              <li>
+                <div class="flex items-center">
+                  <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                       xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                          clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">nouveau</span>
+                </div>
+              </li>
+            </ol>
+          </nav>
+          <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Enregistrer l'Utilisateur</h1>
+        </div>
+
+        <div>
+          <div class="px-5  text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+            <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
+              Browse a list of Flowbite products designed to help you work and play, stay organized, get answers, keep in touch, grow your business, and more.
+            </p>
+            <form [formGroup]="createUserForm" class="mt-4" (submit)="handleCreateUser()" >
+
+              <div class="grid gap-6 mb-6 md:grid-cols-2">
+                  <div class="mt-2">
+                    <label for="firstName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
+                    <input type="text" formControlName="firstName" name="firstName" id="firstName"
+                           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-violet-500 dark:focus:border-violet-500"
+                           placeholder="Nom " required>
+                  </div>
+                <div class="mt-2">
+                  <label for="lastName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prénom</label>
+                  <input type="text" formControlName="lastName" name="lastName" id="lastName"
+                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-violet-500 dark:focus:border-violet-500"
+                         placeholder="Prénom " required>
+                </div>
+              </div>
+
+              <div class="grid gap-6 mb-6 md:grid-cols-2">
+                <div class="mt-2">
+                  <label for="genre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Genre</label>
+                  <select formControlName="genre" name="genre" id="genre" required class="bg-gray-50 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-violet-500 dark:focus:border-violet-500">
+                    <option [value]="Genre.MALE">Homme</option>
+                    <option [value]="Genre.FEMALE">Femme</option>
+                  </select>
+                </div>
+                <div class="mt-2">
+                  <label for="dateNaissance" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date de Naissance</label>
+                  <input type="date" formControlName="dateNaissance" name="dateNaissance" id="dateNaissance"
+                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-violet-500 dark:focus:border-violet-500"
+                         placeholder="Prénom " required>
+                </div>
+              </div>
+
+              <div class="grid gap-6 mb-6 md:grid-cols-2">
+                <div class="mt-2">
+                  <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                  <input type="email" formControlName="email" name="email" id="email"
+                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-violet-500 dark:focus:border-violet-500"
+                         placeholder="email" required>
+                </div>
+                <div class="mt-2">
+                  <label for="phoneNumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numéro de telephone</label>
+                  <input type="tel" formControlName="phoneNumber" name="phoneNumber" id="phoneNumber"
+                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-violet-500 dark:focus:border-violet-500"
+                         placeholder="Numéro " required>
+                </div>
+              </div>
+
+              <div class="grid gap-6 mb-6 md:grid-cols-2">
+                <div class="mt-2">
+                  <label for="matricule" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Matricule</label>
+                  <input type="text" formControlName="matricule" name="matricule" id="matricule"
+                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-violet-500 dark:focus:border-violet-500"
+                         placeholder="matricule" required>
+                </div>
+                <div class="mt-2">
+                  <label  for="rolesId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Roles</label>
+                  <select multiple formControlName="rolesId" name="rolesId" id="rolesId" required class="bg-gray-50 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-violet-500 dark:focus:border-violet-500">
+                    <option value="1" >{{Role.Admin}}</option>
+                    <option value="2" >{{Role.Caissier}}</option>
+                    <option value="3" >{{Role.Gestionnaire}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="flex justify-end">
+                <div>
+                  <button
+                    class="text-white bg-violet-600 hover:bg-violet-800 focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-violet-800"
+                    type="submit">
+                    Enregistre l'Utilisateur
+                  </button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+
+
+

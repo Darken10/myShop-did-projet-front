@@ -43,8 +43,8 @@
           class="flex items-center justify-between mr-4"
         >
           <img
-            src="https://flowbite.s3.amazonaws.com/logo.svg"
-            class="mr-3 h-8"
+            src="logo.jpg"
+            class="mr-3 h-16"
             alt="Flowbite Logo"
           />
           <span
@@ -370,7 +370,7 @@
           <span class="sr-only">Open user menu</span>
           <img
             class="w-8 h-8 rounded-full"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
+            src="user.png"
             alt="user photo"
           />
         </button>
@@ -382,10 +382,10 @@
           <div class="py-3 px-4">
             <span
               class="block text-sm font-semibold text-gray-900 dark:text-white"
-            >SANOU Ali</span
+            >{{user?.firstName}} {{user?.lastName}}</span
             >
             <span class="block text-sm text-gray-900 truncate dark:text-white"
-            >sanou.yyy.com</span
+            >{{ user?.email }}</span
             >
           </div>
           <ul
@@ -532,7 +532,7 @@
       <ul class="space-y-4 lg:mt-10">
         <li class="">
           <a
-            routerLink=""
+            routerLink="dashbord"
             class="flex items-center p-2 py-4 text-base font-medium text-gray-900 rounded-lg dark:text-white active:bg-gray-200 dark:hover:bg-gray-700 group"
             routerLinkActive="bg-gray-500 text-white"
           >
@@ -579,10 +579,12 @@
         <li>
           <a
             routerLink="/list-commande"
+            routerLinkActive="bg-gray-500 text-white"
             class="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
             aria-controls="dropdown-sales"
           >
             <svg
+              routerLinkActive="text-white"
               aria-hidden="true"
               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
               fill="currentColor"
@@ -600,30 +602,7 @@
             >
           </a>
         </li>
-        <li>
-          <a
-            routerLink="/admin"
-            class="flex items-center p-2 py-4 text-base font-medium text-gray-900 rounded-lg dark:text-white active:bg-gray-200 dark:hover:bg-gray-700 group"
-            routerLinkActive="bg-gray-500 text-white"
-            aria-controls="dropdown-pages"
-          >
-            <svg
-              routerLinkActive="text-white"
-              aria-hidden="true"
-              class="flex-shrink-0 w-6 h-6 text-gray-700 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-            <span class="flex-1 ml-3 text-left whitespace-nowrap">Personnels</span>
-          </a>
-        </li>
+
       </ul>
     </div>
   </aside>

@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {ProduitService} from "../../../services/produit/produit/produit.service";
 import {IProduit} from "../../../../models/Interfaces";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommandeService} from "../../../services/produit/commande/commande.service";
 import {Router} from "@angular/router";
 import {FactureService} from "../../../services/global/facture/facture.service";
@@ -29,8 +29,10 @@ export class CaissierProduitListPageComponent {
 
   cartProduits: Map<number, {quantite: number,produit: IProduit}> = new Map()
   produits : IProduit[] = []
+  allProduits : IProduit[] = []
   produit : IProduit | undefined = undefined
   displayProduits : IProduit[] = []
+  search : FormControl = new FormControl<string>('')
 
   currentPage  = 1;
   pageSize = 3
@@ -42,14 +44,25 @@ export class CaissierProduitListPageComponent {
    /* this.modal._targetEl = document.getElementById('voir-prouit-info')*/
     this.produitService.findAll().subscribe((prod)=>{
       this.produits = prod
+      this.allProduits = prod
       this.updateDisplayProduit()
     })
   }
 
   updateDisplayProduit(){
+    const searhedValue  = this.search.value?.toLowerCase().trim() as string
     const startIndex = (this.currentPage -1)*this.pageSize
     const endIndex = startIndex + this.pageSize
-    this.displayProduits = this.produits.slice(startIndex,endIndex)
+    if (searhedValue != ''){
+      const searchedProduit = this.produits.filter((p)=>{
+        return p.reference?.toLowerCase().trim().includes(searhedValue) || p.libelle?.toLowerCase().trim().includes(searhedValue)
+      })
+      this.displayProduits = searchedProduit.slice(startIndex,endIndex)
+    } else {
+      this.displayProduits = this.produits.slice(startIndex,endIndex)
+    }
+
+
   }
 
   nextPage(){
@@ -115,4 +128,8 @@ export class CaissierProduitListPageComponent {
   }
 
 
+  onChangeSearchField() {
+    console.log(this.search.value)
+    this.updateDisplayProduit()
+  }
 }

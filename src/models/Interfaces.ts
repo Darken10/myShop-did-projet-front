@@ -136,3 +136,9 @@ export interface ILigneCommande {
   promotion : IPromotion
   produit: IProduitMini;
 }
+
+export interface IRole{
+  id : number,
+  libelle : string,
+  description : string
+}

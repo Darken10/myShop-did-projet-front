@@ -10,6 +10,7 @@ import {Category, Tag} from "../../../../models/interfaceRequest";
 import {ProduitService} from "../../../services/produit/produit/produit.service";
 import {Router} from "@angular/router";
 import {AlertService} from "../../../services/global/alert.service";
+import {initModals} from "flowbite";
 
 @Component({
   selector: 'app-gestionnaire-create-produit-page',
@@ -63,6 +64,7 @@ export class GestionnaireCreateProduitPageComponent implements OnInit,OnDestroy{
     this.subscription.add(subscribeCat)
     const subscribeTag= this.tagService.findAll().subscribe((tags)=>{
       this.tags = tags
+      initModals()
     })
     this.subscription.add(subscribeTag)
 

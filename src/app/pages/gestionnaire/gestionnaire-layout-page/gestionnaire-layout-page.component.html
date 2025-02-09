@@ -371,7 +371,7 @@
           <span class="sr-only">Open user menu</span>
           <img
             class="w-8 h-8 rounded-full"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
+            src="user.png"
             alt="user photo"
           />
         </button>
@@ -383,10 +383,10 @@
           <div class="py-3 px-4">
             <span
               class="block text-sm font-semibold text-gray-900 dark:text-white"
-            >SANOU Ali</span
+            >{{user?.firstName}} {{user?.lastName}}</span
             >
             <span class="block text-sm text-gray-900 truncate dark:text-white"
-            >sanou.yyy.com</span
+            >{{ user?.email }}</span
             >
           </div>
           <ul
@@ -407,7 +407,7 @@
           >
             <li>
               <a
-                href="/gestionnaire"
+                href="/"
                 class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
               ><svg
                 class="mr-2 w-5 h-5 text-gray-400"
@@ -421,7 +421,7 @@
                   clip-rule="evenodd"
                 ></path>
               </svg>
-                Gestionnaire</a
+                Caissier</a
               >
             </li>
             <li>

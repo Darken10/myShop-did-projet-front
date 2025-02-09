@@ -3,14 +3,15 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ProduitService} from "../../../services/produit/produit/produit.service";
 import {IProduit} from "../../../../models/Interfaces";
 import {Subscription} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {PromotionService} from "../../../services/produit/produit/promotion.service";
 @Component({
   selector: 'app-gestionnaire-show-produit-page',
   standalone: true,
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './gestionnaire-show-produit-page.component.html',
   styleUrl: './gestionnaire-show-produit-page.component.css'

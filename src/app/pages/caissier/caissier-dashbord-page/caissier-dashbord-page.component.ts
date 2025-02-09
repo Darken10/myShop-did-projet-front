@@ -1,6 +1,9 @@
-import {AfterViewInit, Component, inject, OnInit, PLATFORM_ID} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import ApexCharts from 'apexcharts';
-import {isPlatformBrowser} from "@angular/common";
+import {LoginService} from "../../../services/auth/login.service";
+import {IUser} from "../../../../models/Interfaces";
+import {StatistiqueService} from "../../../services/statistique/statistique.service";
+import {getMondayOfCurrent} from "../../../../functions/functions";
 
 @Component({
   selector: 'app-caissier-dashbord-page',
@@ -11,21 +14,56 @@ import {isPlatformBrowser} from "@angular/common";
 })
 export class CaissierDashbordPageComponent implements OnInit{
 
+  loginService : LoginService = inject(LoginService)
+  statistiqueService : StatistiqueService = inject(StatistiqueService)
+  lastLundi : Date  = new Date()
+  user : IUser | null | undefined
+  CAParSemain:number[]  = []
+  PaiementParSemain:number[]  = []
 
   ngOnInit(): void {
-        this.salesThisWeek()
-    }
+    this.lastLundi = getMondayOfCurrent()
+    this.loginService.getUser().subscribe((user)=>{
+      this.user = user
+      if (this.user && this.lastLundi){
+        this.statistiqueService.getChiffreAffaireParJourSemaine(this.user.id,this.lastLundi).subscribe((data)=>{
+
+          this.CAParSemain = this.getArrayOfNumber(data)
+          console.log(this.CAParSemain)
+          if (this.user)
+          this.statistiqueService.getMontantPaiementParJourSemaine(this.user?.id,this.lastLundi).subscribe((data)=>{
+            this.PaiementParSemain = this.getArrayOfNumber(data)
+            this.salesThisWeek(this.CAParSemain, this.PaiementParSemain)
+          })
+        })
+
+      }
+    })
+
+  }
 
 
+  private getArrayOfNumber(data:any){
+    let  PaiementParSemain:number[] = []
+    PaiementParSemain[0] = data?.lundi ?? 0
+    PaiementParSemain[1] = data?.mardi ?? 0
+    PaiementParSemain[2] = data?.mercredi ?? 0
+    PaiementParSemain[3] = data?.jeudi ?? 0
+    PaiementParSemain[4] = data?.vendredi ?? 0
+    PaiementParSemain[5] = data?.samedi ?? 0
+    PaiementParSemain[6] = data?.dimanche ?? 0
+    return PaiementParSemain
+  }
 
-  salesThisWeek(){
+
+  salesThisWeek(CAParSemain: number[],PaiementParSemain:number[]){
     if (document.getElementById('main-chart')) {
-      const chart = new ApexCharts(document.getElementById('main-chart'), this.getMainChartOptions());
+      const chart = new ApexCharts(document.getElementById('main-chart'), this.getMainChartOptions(CAParSemain,PaiementParSemain));
       chart.render();
 
       // init again when toggling dark mode
       document.addEventListener('dark-mode', () => {
-        chart.updateOptions(this.getMainChartOptions());
+        chart.updateOptions(this.getMainChartOptions(CAParSemain,PaiementParSemain));
       });
     }
 
@@ -33,7 +71,7 @@ export class CaissierDashbordPageComponent implements OnInit{
 
 
 
-  getMainChartOptions = () => {
+  getMainChartOptions = (CAParSemain:number[],PaiementParSemain:number[]) => {
     let mainChartColors: { borderColor: string; labelColor: string; opacityFrom: number; opacityTo: number }
 
     if (document.documentElement.classList.contains('dark')) {
@@ -90,13 +128,13 @@ export class CaissierDashbordPageComponent implements OnInit{
       },
       series: [
         {
-          name: 'Revenue',
-          data: [6356, 6218, 6156, 6526, 6356, 6256, 6056],
+          name: 'Vente',
+          data:  CAParSemain,
           color: '#1A56DB'
         },
         {
-          name: 'Revenue (previous period)',
-          data: [6556, 6725, 6424, 6356, 6586, 6756, 6616],
+          name: 'Paiement',
+          data: PaiementParSemain,
           color: '#FDBA8C'
         }
       ],
@@ -109,7 +147,15 @@ export class CaissierDashbordPageComponent implements OnInit{
         }
       },
       xaxis: {
-        categories: ['01 Feb', '02 Feb', '03 Feb', '04 Feb', '05 Feb', '06 Feb', '07 Feb'],
+        categories: [
+          (this.lastLundi?.getDate()).toString().padStart(2,'0')+ ' Fev',
+          (this.lastLundi?.getDate()+1).toString().padStart(2,'0')+ ' Fev',
+          (this.lastLundi?.getDate()+2).toString().padStart(2,'0')+ ' Fev',
+          (this.lastLundi?.getDate()+3).toString().padStart(2,'0')+ ' Fev',
+          (this.lastLundi?.getDate()+4).toString().padStart(2,'0')+ ' Fev',
+          (this.lastLundi?.getDate()+5).toString().padStart(2,'0')+ ' Fev',
+          (this.lastLundi?.getDate()+6).toString().padStart(2,'0')+ ' Fev'
+        ],
         labels: {
           style: {
             colors: [mainChartColors.labelColor],
@@ -141,7 +187,7 @@ export class CaissierDashbordPageComponent implements OnInit{
             fontWeight: 500,
           },
           formatter: function (value: string) {
-            return '$' + value;
+            return  value + 'XOF';
           }
         },
       },
@@ -171,4 +217,12 @@ export class CaissierDashbordPageComponent implements OnInit{
     };
   }
 
+
+  get totalVente():number{
+    let somme = 0
+    this.CAParSemain.forEach(a=>{
+      somme = somme+a
+    })
+    return somme
+  }
 }

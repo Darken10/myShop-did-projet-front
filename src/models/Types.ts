@@ -12,3 +12,27 @@ export type AlertType = {
 }
 
 export type CartDataType = { quantite: number; produit: IProduit,promotion?:IPromotion|undefined, prixUnitaire?:number|undefined }
+
+export type NewPasswordCredentialType = {
+  password: string;
+  jeton: string;
+}
+
+export type UserCountByStatutResponse = {active:number,en_attente:number,inactive:number}
+export type UserCountResponse = {
+  caissier: number;
+  gestionnaire: number;
+  admin: number;
+}
+
+export interface ProduitCategoriesTags {
+  produit: number;
+  categories: number;
+  tags: number;
+}
+
+export interface StockStatut {
+  en_stock: number;
+  fini: number;
+  carence: number;
+}

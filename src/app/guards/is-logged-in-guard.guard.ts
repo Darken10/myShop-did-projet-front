@@ -8,7 +8,8 @@ export const isLoggedInGuardGuard: CanActivateFn = (route, state) => {
   const loginService=inject(LoginService);
   const router=inject(Router);
 
-  console.log("user",loginService.user());
+  console.log("Guade")
+  console.log(loginService.user()?.lastName)
   if(loginService.user()=== undefined){
     loginService.getUser().subscribe({
       next:(res)=>{

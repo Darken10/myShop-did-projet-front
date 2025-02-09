@@ -6,6 +6,7 @@ import {ProduitService} from "../../../services/produit/produit/produit.service"
 import {PromotionService} from "../../../services/produit/produit/promotion.service";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
+import {initModals} from "flowbite";
 
 @Component({
   selector: 'app-gestionnaire-create-promotion-page',
@@ -45,6 +46,7 @@ export class GestionnaireCreatePromotionPageComponent implements OnInit,OnDestro
         console.log(promo)
         this.router.navigate(["/gestionnaire/show-promotion/"+promo.id])
       }
+      initModals()
     })
     this.subscription?.add(subcr)
     console.log(this.promotionCreateForm.value)

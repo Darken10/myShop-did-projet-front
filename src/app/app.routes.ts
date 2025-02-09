@@ -58,6 +58,13 @@ import {
 import {
   CaisseShowCommandePageComponent
 } from "./pages/caissier/caisse-show-commande-page/caisse-show-commande-page.component";
+import {AdminUserLIstPageComponent} from "./pages/admin/admin-user-list-page/admin-user-list-page.component";
+import {
+  AdminCreateUserPageComponent
+} from "./pages/admin/admin-create-user-page/admin-create-user-page.component";
+import {AdminShowUserPageComponent} from "./pages/admin/admin-show-user-page/admin-show-user-page.component";
+import {RoleGuard} from "./guards/role/role.guard";
+
 
 export const routes: Routes = [
   {
@@ -69,14 +76,13 @@ export const routes: Routes = [
     component: ChangePasswordPageComponent,
   },
   {
-    path: "reset-password",
+    path: "reset-pwd",
     component: ResetPasswordPageComponent,
   },
   {
     path: "active-account",
     component: ActiveAccountPasswordPageComponent,
   },
-
   {
     path: "forbiden",
     component: ForbidenPageComponent,
@@ -97,18 +103,37 @@ export const routes: Routes = [
   {
     path: "admin",
     component: AdminLayoutPageComponent,
-    /*canActivate:[isLoggedInGuard,isAdminMiddleware],*/
+    canActivate:[isLoggedInGuardGuard,RoleGuard],
+    data: { expectedRoles: ['Admin'] },
     children:[
       {
+        path: "dashbord",
+        component: AdminDashbordPageComponent,
+      },
+      {
         path: "",
-        component: AdminDashbordPageComponent
+        redirectTo :"/admin/dashbord",
+        pathMatch : "full"
+      },
+      {
+        path: "users",
+        component: AdminUserLIstPageComponent
+      },
+      {
+        path: "users/create",
+        component: AdminCreateUserPageComponent
+      },
+      {
+        path: "users/:id",
+        component: AdminShowUserPageComponent
       }
     ]
   },
   {
     path: "gestionnaire",
     component: GestionnaireLayoutPageComponent,
-    /*canActivate:[isLoggedInGuard],*/
+    canActivate:[isLoggedInGuardGuard,RoleGuard],
+    data: { expectedRoles: ['Gestionnaire'] },
     children:[
       {
         path: "dashbord",
@@ -160,12 +185,19 @@ export const routes: Routes = [
   {
     path: "",
     component: CaissierLayoutPageComponent,
-    /*canActivate:[isLoggedInGuard],*/
+    canActivate:[isLoggedInGuardGuard,RoleGuard],
+    data: { expectedRoles: ['Caissier'] },
     children:[
-        {
-          path: "",
-          component: CaissierDashbordPageComponent,
-        },
+
+      {
+        path: "dashbord",
+        component: CaissierDashbordPageComponent,
+      },
+      {
+        path: "",
+        redirectTo :"/dashbord",
+        pathMatch : "full"
+      },
         {
           path: "produits-list",
           component: CaissierProduitListPageComponent,
@@ -184,5 +216,6 @@ export const routes: Routes = [
         },
       ]
   },
+  { path: '**', redirectTo: '/not-found' }
 
 ];

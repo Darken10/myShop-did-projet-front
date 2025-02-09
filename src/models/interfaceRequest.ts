@@ -1,4 +1,11 @@
-import {CommandeStatutEnum, MethodePaiementEnum, StatusPaiementEnum, UniteProduitEnum} from "./Enums";
+import {
+  CommandeStatutEnum,
+  Genre,
+  MethodePaiementEnum,
+  StatusPaiementEnum,
+  UniteProduitEnum,
+  UserStatusEnum
+} from "./Enums";
 
 export interface Produit {
   libelle: string;
@@ -86,3 +93,17 @@ export interface Client {
   solde?: number;
   adress?: string;
 }
+
+export interface User {
+  firstName: string;
+  lastName: string;
+  genre: Genre;
+  dateNaissance: Date;
+  email: string;
+  phoneNumber: string;
+  matricule: string;
+  status: UserStatusEnum;
+  rolesId: number[];
+}
+
+
