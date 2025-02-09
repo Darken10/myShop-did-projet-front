@@ -39,13 +39,21 @@ export class LoginPageComponent implements OnDestroy{
         next:((res:IUser|null|undefined)=>{
           if (res){
             this.invalideCredential = false
-            this.router.navigate(['/'],{onSameUrlNavigation:'reload'}).then(_ => {
-              console.log(res)
-              this.alertService.show({
-                type : "success",
-                message : "Connection reussi"
-              })
-            });
+            if (res.roles.find(a=>a.libelle=="Caissier")){
+              this.router.navigate(['/'],{onSameUrlNavigation:'reload'}).then(_ => {
+                console.log(res)
+              });
+            }
+            if (res.roles.find(a=>a.libelle=="Gestionnaire")){
+              this.router.navigate(['/gestionnaire'],{onSameUrlNavigation:'reload'}).then(_ => {
+                console.log(res)
+              });
+            }
+            if (res.roles.find(a=>a.libelle=="Admin")){
+              this.router.navigate(['/admin'],{onSameUrlNavigation:'reload'}).then(_ => {
+                console.log(res)
+              });
+            }
           }
         }),
         error:(error=>{

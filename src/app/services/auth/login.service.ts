@@ -46,7 +46,7 @@ export class LoginService {
 
   logout():Observable<null>{
     this.user.set(null);
-    return this.http.get(this.apiUrl+"/logout")
+    return this.http.post(this.apiUrl+"/logout",{})
       .pipe(
         tap((res:any)=>{
           localStorage.removeItem("token");
